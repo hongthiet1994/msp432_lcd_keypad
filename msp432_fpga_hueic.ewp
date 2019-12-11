@@ -2133,6 +2133,12 @@
             <name>$PROJ_DIR$\lcd.h</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\lcd_st7565.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\lcd_st7565.h</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\main.c</name>
         </file>
         <file>

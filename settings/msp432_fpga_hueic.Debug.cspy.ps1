@@ -23,9 +23,9 @@
 
 if ($debugfile -eq "")
 {
-& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\common\bin\cspybat" -f "D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\3.MSP432_release\settings\msp432_fpga_hueic.Debug.general.xcl" --backend -f "D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\3.MSP432_release\settings\msp432_fpga_hueic.Debug.driver.xcl" 
+& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\common\bin\cspybat" -f "D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\settings\msp432_fpga_hueic.Debug.general.xcl" --backend -f "D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\settings\msp432_fpga_hueic.Debug.driver.xcl" 
 }
 else
 {
-& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\common\bin\cspybat" -f "D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\3.MSP432_release\settings\msp432_fpga_hueic.Debug.general.xcl" --debug_file=$debugfile --backend -f "D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\3.MSP432_release\settings\msp432_fpga_hueic.Debug.driver.xcl" 
+& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\common\bin\cspybat" -f "D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\settings\msp432_fpga_hueic.Debug.general.xcl" --debug_file=$debugfile --backend -f "D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\settings\msp432_fpga_hueic.Debug.driver.xcl" 
 }

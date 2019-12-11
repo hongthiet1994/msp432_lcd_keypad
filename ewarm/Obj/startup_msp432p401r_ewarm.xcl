@@ -1,18 +1,18 @@
-"D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\3.MSP432_release\startup_msp432p401r_ewarm.c"
+"D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\startup_msp432p401r_ewarm.c"
 -std=c11
 -ferror-limit=0
 -fbracket-depth=512
 -MD
 -MF
-D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\3.MSP432_release\ewarm\Obj\startup_msp432p401r_ewarm.pbi.dep
+D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\ewarm\Obj\startup_msp432p401r_ewarm.pbi.dep
 -o
 startup_msp432p401r_ewarm.pbi
 -I
-D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\3.MSP432_release
+D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432
 -I
-D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\3.MSP432_release
+D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432
 -I
-D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\3.MSP432_release\..\..\..\..\driverlib\MSP432P4xx
+D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\..\..\..\..\driverlib\MSP432P4xx
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\arm\inc\TexasInstruments
 -I
@@ -20,13 +20,13 @@ C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\arm\CMSIS\Include
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\arm\CMSIS\Core\Include
 -I
-D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\3.MSP432_release\\driverlib\MSP432P4xx
+D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\arm\inc
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\arm\inc\c
 -I
-D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\3.MSP432_release
+D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432
 -I
 D:\1.PKH\driverlib\MSP432P4xx
 -I
@@ -36,7 +36,7 @@ C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\arm\CMSIS\Include
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\arm\CMSIS\Core\Include
 -I
-D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\3.MSP432_release\driverlib\MSP432P4xx
+D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0
