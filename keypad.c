@@ -7,6 +7,8 @@
 #include "keypad.h"
 
 
+uint8_t ui8_key_input = 0; 
+uint16_t ui16_status = 0;
 
 const unsigned int  key1[4][4] ={{1,2,3,13}
 ,{4,5,6,14}
@@ -52,4 +54,47 @@ void keybad_init()
   GPIO_setOutputLowOnPin(GPIO_PORT_P5,GPIO_PIN0+GPIO_PIN1+GPIO_PIN4+GPIO_PIN5);
   GPIO_setOutputLowOnPin(GPIO_PORT_P7,GPIO_PIN7);
   Interrupt_enableInterrupt(INT_PORT6);  
+}
+
+
+/*
+// The function scan keys in rows
+//  @param : x is the number row
+*/
+void scan_row(uint16_t x)
+{
+  GPIO_setOutputLowOnPin(GPIO_PORT_P5, GPIO_PIN0);
+  GPIO_setOutputHighOnPin(GPIO_PORT_P5, GPIO_PIN1);
+  GPIO_setOutputHighOnPin(GPIO_PORT_P5, GPIO_PIN4);
+  GPIO_setOutputHighOnPin(GPIO_PORT_P5, GPIO_PIN5);
+  if(!GPIO_getInputPinValue(GPIO_PORT_P6,ui16_status))
+  {
+    ui8_key_input = key1[0][x-1];
+    //returnKey();
+  }
+  
+  GPIO_setOutputLowOnPin(GPIO_PORT_P5, GPIO_PIN1);
+  GPIO_setOutputHighOnPin(GPIO_PORT_P5, GPIO_PIN0);
+  if(!GPIO_getInputPinValue(GPIO_PORT_P6,ui16_status))
+  {
+    
+    ui8_key_input = key1[1][x-1];
+    // returnKey();
+  }
+  
+  GPIO_setOutputLowOnPin(GPIO_PORT_P5, GPIO_PIN4);
+  GPIO_setOutputHighOnPin(GPIO_PORT_P5, GPIO_PIN1);
+  if(!GPIO_getInputPinValue(GPIO_PORT_P6,ui16_status))
+  {
+    ui8_key_input = key1[2][x-1];
+    // returnKey();
+  }
+  GPIO_setOutputLowOnPin(GPIO_PORT_P5, GPIO_PIN5);
+  GPIO_setOutputHighOnPin(GPIO_PORT_P5, GPIO_PIN4);
+  if(!GPIO_getInputPinValue(GPIO_PORT_P6,ui16_status))
+  {
+    ui8_key_input = key1[3][x-1];
+    //returnKey();
+  }
+  GPIO_setOutputLowOnPin(GPIO_PORT_P5,GPIO_PIN1+GPIO_PIN0+GPIO_PIN4+GPIO_PIN5);
 }

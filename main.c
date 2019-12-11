@@ -7,6 +7,8 @@
 #include "module_rtc.h"
 #include "lcd_st7565_lib.h"
 #include "main.h"
+#include "module_uart.h"
+
 
 #define address_number_member 0x3E000
 #define address_start_infor 0x3E001
@@ -156,7 +158,7 @@ void add_user();
 void login();
 void menu();
 void get_character();
-void scan_row( uint16_t x);
+
 void special_Keys(int a);
 char *present_day(uint8_t day);
 
@@ -166,7 +168,7 @@ void Time_A0_100ns(uint16_t t);
 void Time_A1_1s();
 
 int itoa(int value,char *ptr);
-void send_string_UART();
+
 bool bo_input_sensor= false;
 bool bo_input_pin_RFID = false;
 bool bo_read_complete = false;
@@ -210,7 +212,7 @@ uint8_t ui8_employee_code=0;
 uint8_t ui8_employee_code_edit=0;
 uint8_t ui8_number_member = 0;
 uint8_t ui8_operation_select=0;
-uint8_t ui8_key_input = 0; 
+extern uint8_t ui8_key_input; 
 uint8_t ui8_key_input_befor=0;
 uint8_t ui8_key_input_late=0;
 uint8_t ui8_bit1 = 0;
@@ -221,7 +223,7 @@ uint8_t ui8_time_open_door = 0;
 uint8_t cout = 0;
 uint8_t  ui8_num_cmd = 0;
 
-uint16_t ui16_status = 0;
+extern uint16_t ui16_status;
 uint16_t ui16_idle = 0;
 uint16_t ui16_count = 0;
 
@@ -488,6 +490,8 @@ void T32_INT1_IRQHandler(void)
   ui8_key_input_befor = 0;
   Time32_INT2_1ms(300); 
 }
+
+
 void TA0_N_IRQHandler(void)
 {
   Timer_A_clearInterruptFlag(TIMER_A0_BASE);
@@ -552,6 +556,8 @@ void T32_INT2_IRQHandler(void)
   Timer32_enableInterrupt(TIMER32_1_BASE);
   Timer32_startTimer(TIMER32_1_BASE, true);
 }
+
+// interrupt col
 void INT_PORT6_Haldler(void)
 {
   ui16_status = GPIO_getEnabledInterruptStatus(GPIO_PORT_P6);
@@ -762,6 +768,8 @@ void RTC_C_IRQHandler(void)
   
 }
 
+
+// uart esp32
 void EUSCIA2_IRQHandler(void)
 {
   uint32_t status = MAP_UART_getEnabledInterruptStatus(EUSCI_A2_BASE);
@@ -822,13 +830,7 @@ void EUSCIA2_IRQHandler(void)
   
 }
 
-void send_string_UART(char* data_string)
-{
-  for(int i=0;i<strlen(data_string);i++)
-  {
-    UART_transmitData(EUSCI_A2_BASE,data_string[i]);
-  }
-}
+
 /*
 // The function returns the function of the key that corresponds to each mode
 */
@@ -1257,47 +1259,7 @@ void Time32_INT2_1ms(uint16_t t)
   Timer32_startTimer(TIMER32_1_BASE, true);
   
 }
-/*
-// The function scan keys in rows
-//  @param : x is the number row
-*/
-void scan_row(uint16_t x)
-{
-  OUTPUT_LOW(GPIO_PORT_P5, GPIO_PIN0);
-  OUTPUT_HIGH(GPIO_PORT_P5, GPIO_PIN1);
-  OUTPUT_HIGH(GPIO_PORT_P5, GPIO_PIN4);
-  OUTPUT_HIGH(GPIO_PORT_P5, GPIO_PIN5);
-  if(!GPIO_getInputPinValue(GPIO_PORT_P6,ui16_status))
-  {
-    ui8_key_input = key1[0][x-1];
-    //returnKey();
-  }
-  
-  OUTPUT_LOW(GPIO_PORT_P5, GPIO_PIN1);
-  OUTPUT_HIGH(GPIO_PORT_P5, GPIO_PIN0);
-  if(!GPIO_getInputPinValue(GPIO_PORT_P6,ui16_status))
-  {
-    
-    ui8_key_input = key1[1][x-1];
-    // returnKey();
-  }
-  
-  OUTPUT_LOW(GPIO_PORT_P5, GPIO_PIN4);
-  OUTPUT_HIGH(GPIO_PORT_P5, GPIO_PIN1);
-  if(!GPIO_getInputPinValue(GPIO_PORT_P6,ui16_status))
-  {
-    ui8_key_input = key1[2][x-1];
-    // returnKey();
-  }
-  OUTPUT_LOW(GPIO_PORT_P5, GPIO_PIN5);
-  OUTPUT_HIGH(GPIO_PORT_P5, GPIO_PIN4);
-  if(!GPIO_getInputPinValue(GPIO_PORT_P6,ui16_status))
-  {
-    ui8_key_input = key1[3][x-1];
-    //returnKey();
-  }
-  OUTPUT_LOW(GPIO_PORT_P5,GPIO_PIN1+GPIO_PIN0+GPIO_PIN4+GPIO_PIN5);
-}
+
 /*
 // The function return mode = mode_changepass and screen :
 
@@ -2196,6 +2158,8 @@ void check_tag_RFID()
     
   }
 }
+
+
 char* present_day(uint8_t day)
 {
   switch(day)

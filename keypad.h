@@ -9,3 +9,4 @@
 
 
 void keybad_init();
+void scan_row( uint16_t x);
