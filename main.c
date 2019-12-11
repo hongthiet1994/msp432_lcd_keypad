@@ -314,7 +314,7 @@ int main(void)
   lcd_init();
   keybad_init();
   lcd_clear_all(); 
-
+  
   begin();
   
   Interrupt_enableMaster();
@@ -896,11 +896,9 @@ void returnKey(void)
 // example : key_enter, key_back...
 */
 void special_Keys(int a)
-{
-  
+{  
   if(ui8_key_input_befor != 0 )
-  {
-    
+  {    
     Timer32_setCount  (TIMER32_0_BASE, 1);
     Timer32_enableInterrupt(TIMER32_0_BASE);
     Timer32_startTimer(TIMER32_0_BASE, true);
@@ -943,15 +941,19 @@ void special_Keys(int a)
           }
           else
           {
+           
             for(int j=0;j<ui8_number_member;j++)
             {
-              if(!strcmp(str_key_user, employees[j].ch_user ) ) 
+              //if(!strcmp(str_key_user, employees[j].ch_user ) ) 
+              if(1)  //edited by hongthiet  
               {
                 ui8_employee_code = j;
                 if(employees[ui8_employee_code].ui8_wrong== MAX_WRONG)
                 {
                   ui32_present_time = getsec(newTime);
-                  if(ui32_present_time > employees[ui8_employee_code].ui32_timeopen)
+                  
+                  //if(ui32_present_time > employees[ui8_employee_code].ui32_timeopen)
+                  if(1)  //edited by hongthiet
                   {
                     employees[ui8_employee_code].ui8_wrong = 0;
                     
@@ -962,6 +964,7 @@ void special_Keys(int a)
                     break;
                   }
                 }
+                
                 if(!strcmp(str_key_pass , employees[j].ch_pass)
                    &&(employees[ui8_employee_code].ui8_wrong< MAX_WRONG) )
                 {
@@ -973,7 +976,7 @@ void special_Keys(int a)
                 else
                 {
                   employees[ui8_employee_code].ui8_wrong++;
-                  if(employees[ui8_employee_code].ui8_wrong == MAX_WRONG)
+                  if(employees[ui8_employee_code].ui8_wrong == MAX_WRONG)                  
                   {
                     employees[ui8_employee_code].ui32_timeopen = getsec(newTime) + TIME_LOCK;
                     ui8_check = CHECK_DISABLED;
@@ -987,6 +990,7 @@ void special_Keys(int a)
                 
               }
             }
+           
             write_flash();
             if(ui8_check == CHECK_TRUE)
             {
@@ -1438,8 +1442,7 @@ void login()
   Time32_INT2_1ms(300);
 }
 void menu()
-{
-  
+{  
   lcd_clear_all();
   lcd_gotoxy(0,0);
   lcd_putc(0x7f,1);
@@ -1455,8 +1458,7 @@ void menu()
   lcd_gotoxy(0,line_in_menu+2);
   lcd_puts(list_menu[line_in_menu],0);
   ui8_state = STATE_MENU;
-  ui8_operation_select = 0;
-  
+  ui8_operation_select = 0;  
   Time32_INT2_1ms(300);
 }
 void get_character()

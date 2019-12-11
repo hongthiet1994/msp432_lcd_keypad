@@ -49,6 +49,7 @@ void keybad_init()
   GPIO_enableInterrupt(GPIO_PORT_P6, GPIO_PIN4 + GPIO_PIN5 + GPIO_PIN6 + GPIO_PIN7);
   
   GPIO_setAsOutputPin(GPIO_PORT_P5, GPIO_PIN0+GPIO_PIN1+GPIO_PIN4+GPIO_PIN5);
+  
   GPIO_setAsOutputPin(GPIO_PORT_P7, GPIO_PIN7);
   
   GPIO_setOutputLowOnPin(GPIO_PORT_P5,GPIO_PIN0+GPIO_PIN1+GPIO_PIN4+GPIO_PIN5);
@@ -63,38 +64,38 @@ void keybad_init()
 */
 void scan_row(uint16_t x)
 {
-  GPIO_setOutputLowOnPin(GPIO_PORT_P5, GPIO_PIN0);
-  GPIO_setOutputHighOnPin(GPIO_PORT_P5, GPIO_PIN1);
-  GPIO_setOutputHighOnPin(GPIO_PORT_P5, GPIO_PIN4);
-  GPIO_setOutputHighOnPin(GPIO_PORT_P5, GPIO_PIN5);
+  GPIO_setOutputLowOnPin(KEYPAD_PORT_ROW, KEYPAD_PIN_ROW_1);
+  GPIO_setOutputHighOnPin(KEYPAD_PORT_ROW, KEYPAD_PIN_ROW_2);
+  GPIO_setOutputHighOnPin(KEYPAD_PORT_ROW, KEYPAD_PIN_ROW_3);
+  GPIO_setOutputHighOnPin(KEYPAD_PORT_ROW, KEYPAD_PIN_ROW_4);
   if(!GPIO_getInputPinValue(GPIO_PORT_P6,ui16_status))
   {
     ui8_key_input = key1[0][x-1];
     //returnKey();
   }
   
-  GPIO_setOutputLowOnPin(GPIO_PORT_P5, GPIO_PIN1);
-  GPIO_setOutputHighOnPin(GPIO_PORT_P5, GPIO_PIN0);
-  if(!GPIO_getInputPinValue(GPIO_PORT_P6,ui16_status))
+  GPIO_setOutputLowOnPin(KEYPAD_PORT_ROW, KEYPAD_PIN_ROW_2);
+  GPIO_setOutputHighOnPin(KEYPAD_PORT_ROW, KEYPAD_PIN_ROW_1);
+  if(!GPIO_getInputPinValue(KEYPAD_PORT_COL,ui16_status))
   {
     
     ui8_key_input = key1[1][x-1];
     // returnKey();
   }
   
-  GPIO_setOutputLowOnPin(GPIO_PORT_P5, GPIO_PIN4);
-  GPIO_setOutputHighOnPin(GPIO_PORT_P5, GPIO_PIN1);
-  if(!GPIO_getInputPinValue(GPIO_PORT_P6,ui16_status))
+  GPIO_setOutputLowOnPin(KEYPAD_PORT_ROW, KEYPAD_PIN_ROW_3);
+  GPIO_setOutputHighOnPin(KEYPAD_PORT_ROW, KEYPAD_PIN_ROW_2);
+  if(!GPIO_getInputPinValue(KEYPAD_PORT_COL,ui16_status))
   {
     ui8_key_input = key1[2][x-1];
     // returnKey();
   }
-  GPIO_setOutputLowOnPin(GPIO_PORT_P5, GPIO_PIN5);
-  GPIO_setOutputHighOnPin(GPIO_PORT_P5, GPIO_PIN4);
-  if(!GPIO_getInputPinValue(GPIO_PORT_P6,ui16_status))
+  GPIO_setOutputLowOnPin(KEYPAD_PORT_ROW, KEYPAD_PIN_ROW_4);
+  GPIO_setOutputHighOnPin(KEYPAD_PORT_ROW, KEYPAD_PIN_ROW_3);
+  if(!GPIO_getInputPinValue(KEYPAD_PORT_COL,ui16_status))
   {
     ui8_key_input = key1[3][x-1];
     //returnKey();
   }
-  GPIO_setOutputLowOnPin(GPIO_PORT_P5,GPIO_PIN1+GPIO_PIN0+GPIO_PIN4+GPIO_PIN5);
+  GPIO_setOutputLowOnPin(KEYPAD_PORT_ROW,GPIO_PIN1+GPIO_PIN0+GPIO_PIN4+GPIO_PIN5);
 }
