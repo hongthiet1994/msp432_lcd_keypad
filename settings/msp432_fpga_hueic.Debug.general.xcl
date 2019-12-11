@@ -1,0 +1,15 @@
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\arm\bin\armproc.dll" 
+
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\arm\bin\armxds2.dll" 
+
+"D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\3.MSP432_release\ewarm\Exe\main.out" 
+
+--plugin="C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\arm\bin\armbat.dll" 
+
+--device_macro="C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\arm\config\debugger\TexasInstruments\MSP432P401R.dmac" 
+
+--flash_loader="C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\arm\config\flashloader\TexasInstruments\FlashMSP432P401R.board" 
+
+
+
+

@@ -1,0 +1,4 @@
+main.pbi: \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\3.MSP432_release\main.c \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\3.MSP432_release/lcd.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\stdint.h

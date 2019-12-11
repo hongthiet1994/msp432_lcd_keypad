@@ -1,0 +1,17 @@
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\arm\bin\armproc.dll" 
+
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\arm\bin\armjlink2.dll" 
+
+"C:\Users\hongt\Downloads\msp432_driverlib_3_21_00_05 (1)\msp432_driverlib_3_21_00_05\examples\MSP432P4xx\empty_projects\driverlib_empty_project\ewarm\Exe\main.out" 
+
+--plugin="C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\arm\bin\armbat.dll" 
+
+--device_macro="C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\arm\config\debugger\TexasInstruments\MSP432P401R.dmac" 
+
+--macro="C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\arm\config\flashloader\TexasInstruments\FlashMSP432P4.mac" 
+
+--flash_loader="C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3_2\arm\config\flashloader\TexasInstruments\FlashMSP432P401R.board" 
+
+
+
+
