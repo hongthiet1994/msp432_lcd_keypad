@@ -21,14 +21,15 @@ rule browsedata
 
 #Build steps
 build json_parse.pbi : index json_parse.xcl
+build keypad.pbi : index keypad.xcl
 build lcd.pbi : index lcd.xcl
 build lcd_st7565.pbi : index lcd_st7565.xcl
 build main.pbi : index main.xcl
 build startup_msp432p401r_ewarm.pbi : index startup_msp432p401r_ewarm.xcl
 build system_msp432p401r.pbi : index system_msp432p401r.xcl
-build msp432_fpga_hueic_part0.pbi : link json_parse.pbi lcd.pbi
-build msp432_fpga_hueic_part1.pbi : link lcd_st7565.pbi main.pbi
-build msp432_fpga_hueic_part2.pbi : link startup_msp432p401r_ewarm.pbi system_msp432p401r.pbi
+build msp432_fpga_hueic_part0.pbi : link json_parse.pbi keypad.pbi lcd.pbi
+build msp432_fpga_hueic_part1.pbi : link lcd_st7565.pbi main.pbi startup_msp432p401r_ewarm.pbi
+build msp432_fpga_hueic_part2.pbi : link system_msp432p401r.pbi
 build msp432_fpga_hueic.pbd : link msp432_fpga_hueic_part0.pbi msp432_fpga_hueic_part1.pbi msp432_fpga_hueic_part2.pbi
 build msp432_fpga_hueic.pbw : browsedata msp432_fpga_hueic.pbd
 
