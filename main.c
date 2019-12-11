@@ -1,7 +1,12 @@
-#include "lcd.h"
+//#include "lcd.h"
 #include <string.h>
 #include <math.h>
 #include "json_parse.h"
+#include "keypad.h"
+#include "module_display.h"
+#include "module_rtc.h"
+#include "lcd_st7565_lib.h"
+#include "main.h"
 
 #define address_number_member 0x3E000
 #define address_start_infor 0x3E001
@@ -27,6 +32,14 @@
 #define MAX_BUFFER              200
 #define IP_LEN                  16
 #define SSID_LEN                32
+
+
+
+extern const unsigned char font[][6] ;
+extern const unsigned int  key1[4][4];
+extern const unsigned char     key2[10][5];
+extern const unsigned char     key3[10][5] ;
+extern char logo [] ;
 
 static volatile RTC_C_Calendar newTime;
 const RTC_C_Calendar currentTime =
@@ -220,6 +233,16 @@ char* UART_ip  = "IP";
 char* list_menu[LENGTH_ARRAY1] = {"System Information","User Management","Setting"};
 char* list_edit[LENGTH_ARRAY]={"Profile User","Change Password User","Delete User",
 "Lock/Unlock User","Add Tag RFID","Add User"};
+
+void delay(uint32_t t)
+{
+  for(uint32_t i =0;i<10000;i++)
+  {
+    for(uint32_t j=0;j<t;j++);
+  }
+}
+
+
 int main(void)
 {
   // config and read Flash

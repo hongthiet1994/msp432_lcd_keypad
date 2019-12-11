@@ -2386,19 +2386,46 @@
             <name>$PROJ_DIR$\json_parse.h</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\lcd.c</name>
+            <name>$PROJ_DIR$\keypad.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\lcd.h</name>
+            <name>$PROJ_DIR$\keypad.h</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\lcd_st7565.c</name>
+            <name>$PROJ_DIR$\lcd_st7565_lib.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\lcd_st7565.h</name>
+            <name>$PROJ_DIR$\lcd_st7565_lib.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\main.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\main.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_display.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_display.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_rtc.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_rtc.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_timer.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_timer.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_uart.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_uart.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\startup_msp432p401r_ewarm.c</name>

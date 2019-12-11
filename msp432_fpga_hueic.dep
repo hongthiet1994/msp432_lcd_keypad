@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <fileVersion>4</fileVersion>
-    <fileChecksum>1904944444</fileChecksum>
+    <fileChecksum>587182489</fileChecksum>
     <configuration>
         <name>Debug</name>
         <outputs>
@@ -94,10 +94,37 @@
             <file>$PROJ_DIR$\driverlib\MSP432P4xx\rom.h</file>
             <file>$PROJ_DIR$\driverlib\MSP432P4xx\rom_map.h</file>
             <file>$TOOLKIT_DIR$\inc\TexasInstruments\msp432p401r_classic.h</file>
-            <file>$PROJ_DIR$\ewarm\Obj\lcd_st7565.o</file>
-            <file>$PROJ_DIR$\ewarm\Obj\lcd_st7565.xcl</file>
-            <file>$PROJ_DIR$\lcd_st7565.h</file>
-            <file>$PROJ_DIR$\lcd_st7565.c</file>
+            <file>$PROJ_DIR$\main.h</file>
+            <file>$PROJ_DIR$\module_timer.h</file>
+            <file>$PROJ_DIR$\module_uart.h</file>
+            <file>$PROJ_DIR$\module_rtc.h</file>
+            <file>$PROJ_DIR$\lcd_st7565_lib.h</file>
+            <file>$PROJ_DIR$\module_rtc.c</file>
+            <file>$PROJ_DIR$\lcd_st7565_lib.c</file>
+            <file>$PROJ_DIR$\keypad.h</file>
+            <file>$PROJ_DIR$\ewarm\Obj\keypad.__cstat.et</file>
+            <file>$PROJ_DIR$\ewarm\Obj\keypad.o</file>
+            <file>$PROJ_DIR$\ewarm\Obj\keypad.xcl</file>
+            <file>$PROJ_DIR$\ewarm\Obj\module_timer.o</file>
+            <file>$PROJ_DIR$\ewarm\Obj\module_uart.o</file>
+            <file>$PROJ_DIR$\ewarm\Obj\module_display.xcl</file>
+            <file>$PROJ_DIR$\ewarm\Obj\module_timer.xcl</file>
+            <file>$PROJ_DIR$\ewarm\Obj\module_uart.__cstat.et</file>
+            <file>$PROJ_DIR$\ewarm\Obj\module_display.o</file>
+            <file>$PROJ_DIR$\ewarm\Obj\module_uart.xcl</file>
+            <file>$PROJ_DIR$\ewarm\Obj\module_timer.__cstat.et</file>
+            <file>$PROJ_DIR$\keypad.c</file>
+            <file>$PROJ_DIR$\ewarm\Obj\lcd_st7565_lib.__cstat.et</file>
+            <file>$PROJ_DIR$\module_display.c</file>
+            <file>$PROJ_DIR$\ewarm\Obj\module_rtc.__cstat.et</file>
+            <file>$PROJ_DIR$\ewarm\Obj\module_display.__cstat.et</file>
+            <file>$PROJ_DIR$\module_timer.c</file>
+            <file>$PROJ_DIR$\module_display.h</file>
+            <file>$PROJ_DIR$\ewarm\Obj\module_rtc.xcl</file>
+            <file>$PROJ_DIR$\ewarm\Obj\lcd_st7565_lib.o</file>
+            <file>$PROJ_DIR$\ewarm\Obj\lcd_st7565_lib.xcl</file>
+            <file>$PROJ_DIR$\ewarm\Obj\module_rtc.o</file>
+            <file>$PROJ_DIR$\module_uart.c</file>
         </outputs>
         <file>
             <name>[ROOT_NODE]</name>
@@ -150,7 +177,7 @@
             <inputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 1 40 46 37 24 42 78 43 70 59 19 72 88 45 60 61 51 79 56 54 29 12 39 84 25 66 41 28 80 30 17 31 23 83 85 32 18 68 35 86 87 63 71 22 16 27 75 77 8 69 38 58 73 76 5 48 7 47 49 3</file>
+                    <file> 48 24 42 78 43 70 38 7 47 49 3 37 29 69 76 5 96 40 46 59 19 72 88 45 60 61 51 79 56 54 12 39 84 25 66 41 28 80 30 17 31 23 83 85 32 18 68 35 86 87 63 71 22 16 27 75 77 8 58 73 114 92 93 89</file>
                 </tool>
             </inputs>
         </file>
@@ -188,7 +215,7 @@
             <inputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 65 62 57 82 14 20 34 13 44 67 33</file>
+                    <file> 65 62 98 116 82 105 118 100 101 14 20 34 13 44 67 33</file>
                 </tool>
             </inputs>
         </file>
@@ -239,22 +266,131 @@
             </inputs>
         </file>
         <file>
-            <name>$PROJ_DIR$\lcd_st7565.c</name>
+            <name>$PROJ_DIR$\module_rtc.c</name>
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 89</file>
+                    <file> 118</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 90</file>
+                    <file> 115</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 111</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 40 46 37 24 42 78 43 70 59 19 72 88 45 60 61 51 79 56 54 29 12 39 84 25 66 41 28 80 30 17 31 23 83 85 32 18 68 35 86 87 63 71 22 16 27 75 77 8 69 38 58 73 76 5 92</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\lcd_st7565_lib.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 116</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 117</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 109</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 40 46 37 24 42 78 43 70 59 19 72 88 45 60 61 51 79 56 54 29 12 39 84 25 66 41 28 80 30 17 31 23 83 85 32 18 68 35 86 87 63 71 22 16 27 75 77 8 69 38 58 73 76 5 93</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\keypad.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 98</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 99</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 97</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 40 46 37 24 42 78 43 70 59 19 72 88 45 60 61 51 79 56 54 29 12 39 84 25 66 41 28 80 30 17 31 23 83 85 32 18 68 35 86 87 63 71 22 16 27 75 77 8 69 38 58 73 76 5 96</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_display.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 105</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 102</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 112</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 40 46 37 24 42 78 43 70 59 19 72 88 45 60 61 51 79 56 54 29 12 39 84 25 66 41 28 80 30 17 31 23 83 85 32 18 68 35 86 87 63 71 22 16 27 75 77 8 69 38 58 73 76 5 114 93</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_timer.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 100</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 103</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 107</file>
                 </tool>
             </outputs>
         </file>
-        <forcedrebuild>
-            <name>[MULTI_TOOL]</name>
-            <tool>ILINK</tool>
-        </forcedrebuild>
+        <file>
+            <name>$PROJ_DIR$\module_uart.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 101</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 106</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 104</file>
+                </tool>
+            </outputs>
+        </file>
     </configuration>
     <configuration>
         <name>Release</name>
