@@ -2127,12 +2127,6 @@
             <name>$PROJ_DIR$\json_parse.h</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\keypad.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\keypad.h</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\lcd_st7565_lib.c</name>
         </file>
         <file>
@@ -2149,6 +2143,30 @@
         </file>
         <file>
             <name>$PROJ_DIR$\module_display.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_flash.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_flash.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_itoa.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_itoa.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_keypad.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_keypad.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_rfid.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_rfid.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\module_rtc.c</name>

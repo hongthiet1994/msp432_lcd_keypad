@@ -7,6 +7,12 @@
 #include "module_display.h"
 #include "lcd_st7565_lib.h"
 
+extern uint8_t ui8_state;
+extern int8_t line_in_list;
+
+
+extern int8_t line_in_menu;
+extern int8_t line_in_manage;
 
 char logo [] = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x80, 0xC0, 0x60, 0x30, 0x18,
@@ -75,7 +81,21 @@ char logo [] = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-void lcd_init(void)
+
+void begin()
+{  
+  Interrupt_disableInterrupt(INT_T32_INT2);
+  Timer32_disableInterrupt(TIMER32_1_BASE);
+  lcd_clear_all(); 
+  glcd_gotoxy(0,0);
+  lcd_image(0,0,logo,128,64);
+  ui8_state = STATE_IDLE;
+  line_in_list=line_in_manage=line_in_menu = 0;
+  Interrupt_enableInterrupt(INT_PORT2);
+}
+
+
+void init_LCD(void)
 {
   
   GPIO_setAsOutputPin(PORT_LCD_SPI, GPIO_PIN0 + GPIO_PIN2 + GPIO_PIN4 + GPIO_PIN5 );

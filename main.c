@@ -2,16 +2,21 @@
 #include <string.h>
 #include <math.h>
 #include "json_parse.h"
-#include "keypad.h"
+#include "module_keypad.h"
 #include "module_display.h"
 #include "module_rtc.h"
 #include "lcd_st7565_lib.h"
 #include "main.h"
 #include "module_uart.h"
+#include "module_itoa.h"
+#include "module_timer.h"
 
 
-#define address_number_member 0x3E000
-#define address_start_infor 0x3E001
+#define ADDRESS_NUMBER_MEMBER   0x3E000
+
+#define ADDRESS_USER_INFOR      0x3E001
+//#define address_start_infor     0x3E001
+
 
 #define CHECK_FALSE             0
 #define CHECK_TRUE              1
@@ -24,26 +29,30 @@
 #define TIME_LOCK               36000
 #define MAX_WRONG               3
 #define SIZE_KEY                10
-#define PERIOD_TIME_A           51
+
 #define TOTAL                   120
 #define TIME_WAITING_KEY        600
 #define PRESS_ENTER_ONEC        1
 #define PRESS_ENTER_TWICE       2
 #define PRESS_ENTER_THREE       3
 #define TIME_OPEN_DOOR_S        10
-#define MAX_BUFFER              200
+
 #define IP_LEN                  16
 #define SSID_LEN                32
 
-
+extern char buffer_rxdata[MAX_BUFFER];
 
 extern const unsigned char font[][6] ;
 extern const unsigned int  key1[4][4];
 extern const unsigned char     key2[10][5];
 extern const unsigned char     key3[10][5] ;
-extern char logo [] ;
+extern char  logo [] ;
 
-static volatile RTC_C_Calendar newTime;
+
+
+
+
+extern RTC_C_Calendar newTime;
 const RTC_C_Calendar currentTime =
 {
   0,
@@ -55,28 +64,8 @@ const RTC_C_Calendar currentTime =
   2019
 };
 
-Timer_A_UpModeConfig upConfig =
-{
-  TIMER_A_CLOCKSOURCE_ACLK,              
-  TIMER_A_CLOCKSOURCE_DIVIDER_1,          
-  PERIOD_TIME_A,                          
-  TIMER_A_TAIE_INTERRUPT_ENABLE,         
-  TIMER_A_CCIE_CCR0_INTERRUPT_ENABLE,    
-  TIMER_A_DO_CLEAR                        
-    
-};
-const eUSCI_UART_Config uartConfig =
-{
-  EUSCI_A_UART_CLOCKSOURCE_SMCLK,          // SMCLK Clock Source
-  26,                                     // BRDIV = 78
-  1,                                       // UCxBRF = 2
-  0,                                       // UCxBRS = 0
-  EUSCI_A_UART_NO_PARITY,                  // No Parity
-  EUSCI_A_UART_LSB_FIRST,                  // LSB First
-  EUSCI_A_UART_ONE_STOP_BIT,               // One stop bit
-  EUSCI_A_UART_MODE,                       // UART mode
-  EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION  // Oversampling
-};
+
+
 struct infor
 {
   char          ch_user[SIZE_KEY];
@@ -88,24 +77,6 @@ struct infor
   uint32_t      ui32_timeopen;
 }employees[TOTAL],employees_backspace;
 
-enum STATES 
-{
-  STATE_IDLE=1,
-  STATE_LOGIN,
-  STATE_MENU,
-  STATE_INFOR,
-  STATE_MANAGE,
-  STATE_SETTING,
-  STATE_LIST,
-  STATE_PROFILE,
-  STATE_DELETE,
-  STATE_CHANGEPASS,
-  STATE_LOCK_UNLOCK,
-  STATE_ADD_RFID_CODE,
-  STATE_ADD_USER,
-  STATE_WAWITING,       
-  STATE_CHOOSE
-};
 
 enum NUMBER_KEY
 {
@@ -146,7 +117,7 @@ void RFID_returnKey();
 void check_tag_RFID();
 void returnKey();
 
-void begin();
+
 void write_flash();
 void add_RFID();
 void change_password();
@@ -160,14 +131,14 @@ void menu();
 void get_character();
 
 void special_Keys(int a);
-char *present_day(uint8_t day);
+
 
 void Time32_INT2_1ms(uint16_t t);
 void Time32_INT1_1ms(uint16_t t);
-void Time_A0_100ns(uint16_t t);
-void Time_A1_1s();
 
-int itoa(int value,char *ptr);
+
+
+
 
 bool bo_input_sensor= false;
 bool bo_input_pin_RFID = false;
@@ -190,12 +161,10 @@ char str_key_user[SIZE_KEY];
 char str_key_pass[SIZE_KEY];
 char ssid[SSID_LEN];
 char address_IP[IP_LEN];
-char RXData;
-char buffer_rxdata[MAX_BUFFER];
+
 char buffer_txdata[MAX_BUFFER];
-uint8_t ui8_numofopen = 0;
-uint8_t ui8_numofclose = 0;
-uint16_t ui16_index_buffer_RX_uart = 0;
+
+
 
 int8_t i8_counter = 0;
 int8_t x_lcd = 0,y_lcd = 0,x_blink = 0,y_blink = 0;
@@ -221,7 +190,9 @@ uint8_t ui8_col = 0;
 
 uint8_t ui8_time_open_door = 0;
 uint8_t cout = 0;
-uint8_t  ui8_num_cmd = 0;
+
+
+extern uint8_t  ui8_num_cmd;
 
 extern uint16_t ui16_status;
 uint16_t ui16_idle = 0;
@@ -244,31 +215,33 @@ void delay(uint32_t t)
   }
 }
 
-
 int main(void)
 {
   // config and read Flash
   
   FlashCtl_setWaitState(FLASH_BANK0, 2);
   FlashCtl_setWaitState(FLASH_BANK1, 2);
+  
+  
   PCM_setCoreVoltageLevel(PCM_VCORE1);
   FlashCtl_unprotectSector(FLASH_MAIN_MEMORY_SPACE_BANK1,
                            FLASH_SECTOR30 | FLASH_SECTOR31);
   
-  ui8_number_member = *(int *) address_number_member;
+  ui8_number_member = *(int *) ADDRESS_NUMBER_MEMBER;
   for(uint32_t x = 0;x <3000;x++)
   {
-    employees[0].ch_user[x]= *((char *)address_start_infor+x ) ;
+    employees[0].ch_user[x]= *((char *)ADDRESS_USER_INFOR+x ) ;
   }
   // config frequency
   CS_setDCOCenteredFrequency(CS_DCO_FREQUENCY_48);                   
   CS_initClockSignal(CS_MCLK, CS_DCOCLK_SELECT, CS_CLOCK_DIVIDER_1); 
+  
   //CS_initClockSignal(CS_SMCLK, CS_DCOCLK_SELECT, CS_CLOCK_DIVIDER_4); 
   CS_setReferenceOscillatorFrequency(CS_REFO_128KHZ);
   CS_initClockSignal(CS_ACLK, CS_REFOCLK_SELECT, CS_CLOCK_DIVIDER_1);
-  // TIMER_A
-  Timer_A_configureUpMode(TIMER_A0_BASE, &upConfig);
-  Timer_A_configureUpMode(TIMER_A1_BASE, &upConfig);
+  
+
+  
   // config input RFID                            
   GPIO_setAsInputPinWithPullDownResistor(GPIO_PORT_P2, GPIO_PIN6);
   GPIO_interruptEdgeSelect(GPIO_PORT_P2,GPIO_PIN6,GPIO_LOW_TO_HIGH_TRANSITION);
@@ -284,6 +257,7 @@ int main(void)
                                               GPIO_PIN0 | GPIO_PIN1, GPIO_PRIMARY_MODULE_FUNCTION);
   CS_setExternalClockSourceFrequency(32000,48000000);
   CS_startLFXT(false);
+  
   RTC_C_initCalendar(&currentTime, RTC_C_FORMAT_BINARY);
   newTime = currentTime;
   RTC_C_setCalendarEvent(RTC_C_CALENDAREVENT_MINUTECHANGE);
@@ -295,24 +269,13 @@ int main(void)
                           | RTC_C_CLOCK_ALARM_INTERRUPT);
   RTC_C_startClock();
   Interrupt_enableInterrupt(INT_RTC_C);
-  // config TIMER32
-  Timer32_initModule(TIMER32_0_BASE, TIMER32_PRESCALER_1, TIMER32_32BIT, TIMER32_PERIODIC_MODE);
-  Interrupt_enableInterrupt(INT_T32_INT1);
-  
-  Timer32_initModule(TIMER32_1_BASE, TIMER32_PRESCALER_1, TIMER32_32BIT, TIMER32_PERIODIC_MODE);
-  Interrupt_enableInterrupt(INT_T32_INT2);
-  
-  // config UART
-  GPIO_setAsPeripheralModuleFunctionInputPin(GPIO_PORT_P3,
-                                             GPIO_PIN2 | GPIO_PIN3, GPIO_PRIMARY_MODULE_FUNCTION);
-  UART_initModule(EUSCI_A2_BASE, &uartConfig);
-  UART_enableModule(EUSCI_A2_BASE);
-  UART_enableInterrupt(EUSCI_A2_BASE, EUSCI_A_UART_RECEIVE_INTERRUPT);
-  Interrupt_enableInterrupt(INT_EUSCIA2);
+ 
+  init_TIMER();
+  init_UART_ESP();
   
   // init
-  lcd_init();
-  keybad_init();
+  init_LCD();
+  init_keybad();
   lcd_clear_all(); 
   
   begin();
@@ -432,8 +395,7 @@ int main(void)
             getValueString(buffer_rxdata,"USER",str_key_user);
             getValueString(buffer_rxdata,"PASS",str_key_pass);
             getValueString(buffer_rxdata,"RFID",buffer_RFID);
-            getValueInt(buffer_rxdata,"ROLE",&bo_key_role);
-            
+            getValueInt(buffer_rxdata,"ROLE",&bo_key_role);            
             strcpy(employees[ui8_number_member].ch_user, str_key_user);
             strcpy(employees[ui8_number_member].ch_pass, str_key_pass);
             employees[ui8_number_member].bo_role =  bo_key_role;
@@ -453,17 +415,13 @@ int main(void)
         }
       }
       check = CHECK_FALSE;
-      ui8_numofclose=0;
-      ui8_numofopen=0;
-      ui16_index_buffer_RX_uart=0;
-      ui8_num_cmd = 0;
+     reset_Receiver_uart();
     }
     if(press_key)
     {
       returnKey();
       press_key = false;
-    }
-    
+    }    
   }  
 }
 
@@ -567,23 +525,22 @@ void INT_PORT6_Haldler(void)
   {
     ui16_idle = 0;
   }
-  if(ui16_status &GPIO_PIN4)
+  if(ui16_status & KEYPAD_PIN_COL_1)
   {
     scan_row(1);
   }
-  else if(ui16_status & GPIO_PIN5)
+  else if(ui16_status & KEYPAD_PIN_COL_2)
   {
     scan_row(2);
   }
-  else if(ui16_status & GPIO_PIN6)
+  else if(ui16_status & KEYPAD_PIN_COL_3)
   {
     scan_row(3);
   }
-  else if(ui16_status & GPIO_PIN7)
+  else if(ui16_status & KEYPAD_PIN_COL_4)
   {
     scan_row(4);   
-  }
-  
+  }  
 }
 /*
 // The function interrup of PORT2, pin input RFID
@@ -597,12 +554,10 @@ void INT_PORT2_Haldler(void)
   uint8_t array1[8][4];
   uint8_t array2[8];
   if (GPIO_PIN6 & ui16_status)
-  {
-    
+  {    
     Time_A0_100ns(1);
     if(ui8_row<11 && bo_read_complete)
-    {
-      
+    {      
       array[ui8_row][ui8_col] = bo_edge_select;
       ui8_col++;
       if(ui8_col>4)
@@ -673,162 +628,6 @@ void INT_PORT2_Haldler(void)
   
 }
 
-void Time_A0_100ns(uint16_t t)
-{
-  upConfig.timerPeriod= PERIOD_TIME_A;
-  upConfig.clockSourceDivider = TIMER_A_CLOCKSOURCE_DIVIDER_1;
-  Timer_A_configureUpMode(TIMER_A0_BASE, &upConfig);
-  Interrupt_enableInterrupt(INT_TA0_N);
-  Timer_A_startCounter(TIMER_A0_BASE, TIMER_A_UP_MODE);
-  
-}
-/*
-// The function config TIMER_A1 in up mode, and time interrup is 1s
-// start TIMER_A1 - start time close the door 
-// open the door
-*/
-void Time_A1_1s()
-{
-  
-  ui8_time_open_door = 0;
-  GPIO_setOutputLowOnPin(GPIO_PORT_P2, GPIO_PIN7);
-  upConfig.clockSourceDivider = TIMER_A_CLOCKSOURCE_DIVIDER_64;
-  upConfig.timerPeriod= 2000;
-  Timer_A_configureUpMode(TIMER_A1_BASE, &upConfig);
-  Interrupt_enableInterrupt(INT_TA1_N);
-  Timer_A_startCounter(TIMER_A1_BASE, TIMER_A_UP_MODE);
-  
-}
-/*
-// The function convert from init to string
-*/
-int itoa(int value,char *ptr)
-{
-  int count=0,temp;
-  if(ptr==NULL)
-  {
-    return 0; 
-  }
-  if(value==0)
-  {   
-    *ptr='0';
-    return 1;
-  }
-  
-  if(value<0)
-  {
-    value*=(-1);    
-    *ptr++='-';
-    count++;
-  }
-  for(temp=value;temp>0;temp/=10,ptr++);
-  {
-    *ptr='\0';
-  }
-  for(temp=value;temp>0;temp/=10)
-  {
-    *--ptr=temp%10+'0';
-    count++;
-  }
-  return count;
-}
-void RTC_C_IRQHandler(void)
-{
-  uint32_t status;
-  status = MAP_RTC_C_getEnabledInterruptStatus();
-  MAP_RTC_C_clearInterruptFlag(status);
-  newTime = MAP_RTC_C_getCalendarTime();
-  
-  if(ui8_state == STATE_IDLE)
-  {
-    lcd_gotoxy(11,0);
-    lcd_putc((newTime.hours)/10+48,1);
-    lcd_putc((newTime.hours)%10+48,1);
-    lcd_putc(':',1);
-    lcd_putc((newTime.minutes)/10+48,1);
-    lcd_putc((newTime.minutes)%10+48,1);
-    lcd_putc(':',1);
-    lcd_putc((newTime.seconds)/10+48,1);
-    lcd_putc((newTime.seconds)%10+48,1);
-    
-    lcd_gotoxy(7,1);
-    lcd_puts(present_day(newTime.dayOfWeek),1);
-    lcd_putc(',',1);
-    lcd_putc((newTime.dayOfmonth)/10+48,1);
-    lcd_putc((newTime.dayOfmonth)%10+48,1);
-    lcd_putc('/',1);
-    lcd_putc((newTime.month)/10+48,1);
-    lcd_putc((newTime.month)%10+48,1);
-    lcd_putc('/',1);
-    lcd_putc((newTime.year)/1000+48,1);
-    lcd_putc(((newTime.year)%1000)/100+48,1);
-    lcd_putc(((newTime.year)%100)/10+48,1);
-    lcd_putc(((newTime.year)%10)+48,1);
-  }
-  
-}
-
-
-// uart esp32
-void EUSCIA2_IRQHandler(void)
-{
-  uint32_t status = MAP_UART_getEnabledInterruptStatus(EUSCI_A2_BASE);
-  
-  MAP_UART_clearInterruptFlag(EUSCI_A2_BASE, status);
-  
-  if(status & EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG)
-  {
-    RXData = MAP_UART_receiveData(EUSCI_A2_BASE);
-    
-    
-    if(RXData == '{')
-    {
-      ui8_numofopen++;
-      if(ui8_numofopen == 1)
-      {
-        // start receive
-        
-        ui16_index_buffer_RX_uart = 0;
-        buffer_rxdata[ui16_index_buffer_RX_uart] = RXData;
-        
-      }
-      else
-      {
-        ui16_index_buffer_RX_uart++;
-        buffer_rxdata[ui16_index_buffer_RX_uart] = RXData;
-      }
-    }
-    else
-    {
-      if(RXData == '}')
-      {
-        ui8_numofclose++;
-        if(ui8_numofclose == ui8_numofopen)
-        {
-          ui16_index_buffer_RX_uart++;
-          buffer_rxdata[ui16_index_buffer_RX_uart] = RXData;
-          
-          getValueInt(buffer_rxdata,"CMD",&ui8_num_cmd);
-          
-        }
-        else
-        {
-          ui16_index_buffer_RX_uart++;
-          buffer_rxdata[ui16_index_buffer_RX_uart] = RXData; 
-        }
-        
-      }
-      else
-      {
-        ui16_index_buffer_RX_uart++;
-        buffer_rxdata[ui16_index_buffer_RX_uart] = RXData;
-      }
-      
-    }
-    
-  }
-  
-}
 
 
 /*
@@ -902,8 +701,7 @@ void special_Keys(int a)
     Timer32_setCount  (TIMER32_0_BASE, 1);
     Timer32_enableInterrupt(TIMER32_0_BASE);
     Timer32_startTimer(TIMER32_0_BASE, true);
-  }
-  
+  }  
   if(ui8_key_input_befor == 0 )
   {
     ui16_count = 0;
@@ -941,7 +739,7 @@ void special_Keys(int a)
           }
           else
           {
-           
+            
             for(int j=0;j<ui8_number_member;j++)
             {
               //if(!strcmp(str_key_user, employees[j].ch_user ) ) 
@@ -990,7 +788,7 @@ void special_Keys(int a)
                 
               }
             }
-           
+            
             write_flash();
             if(ui8_check == CHECK_TRUE)
             {
@@ -1239,6 +1037,7 @@ void special_Keys(int a)
     ui8_key_input_befor = 0;
   }
 }
+
 /*
 // The function config TIMER32_1 , and time interrup is 1ms
 //  @param t is the number ms
@@ -1251,6 +1050,7 @@ void Time32_INT1_1ms(uint16_t t)
   Timer32_startTimer(TIMER32_0_BASE, true);
   
 }
+
 /*
 // The function config TIMER32_2 , and time interrup is 1ms
 //  @param : t is the number ms
@@ -1270,8 +1070,7 @@ void Time32_INT2_1ms(uint16_t t)
 //------------------------------
 */
 void change_password()
-{
-  
+{  
   lcd_clear_all();
   lcd_gotoxy(0,0);
   lcd_putc(0x7f,1);
@@ -1388,21 +1187,10 @@ void profile_user()
   lcd_puts(buffer_ID,1);
   
 }
-void begin()
-{
-  
-  Interrupt_disableInterrupt(INT_T32_INT2);
-  Timer32_disableInterrupt(TIMER32_1_BASE);
-  lcd_clear_all(); 
-  glcd_gotoxy(0,0);
-  lcd_image(0,0,logo,128,64);
-  ui8_state = STATE_IDLE;
-  line_in_list=line_in_manage=line_in_menu = 0;
-  Interrupt_enableInterrupt(INT_PORT2);
-}
+
+
 void login()
-{
-  
+{  
   lcd_clear_all();
   lcd_gotoxy(0,0);
   lcd_putc(0x7f,1);
@@ -1623,17 +1411,18 @@ void get_character()
   }
   y_blink = y_lcd;
   x_blink = x_lcd;
-  
 }
+
 void write_flash()
 {
-  if(!MAP_FlashCtl_eraseSector(address_number_member))
+  if(!MAP_FlashCtl_eraseSector(ADDRESS_NUMBER_MEMBER))
     while(1);
-  if(!MAP_FlashCtl_programMemory (&ui8_number_member, (void*) address_number_member, 1))
+  if(!MAP_FlashCtl_programMemory (&ui8_number_member, (void*) ADDRESS_NUMBER_MEMBER, 1))
     while(1);
-  if(!MAP_FlashCtl_programMemory (&employees[0], (void*) address_start_infor, 3960))
+  if(!MAP_FlashCtl_programMemory (&employees[0], (void*) ADDRESS_USER_INFOR, 3960))
     while(1);
 }
+
 void list_user()
 {
   
@@ -1685,8 +1474,7 @@ void list_user()
 }
 void manage_user()
 {
-  lcd_clear_all();
-  
+  lcd_clear_all();  
   lcd_gotoxy(0,0);
   lcd_putc(0x7f,1);
   lcd_gotoxy(20,0);
@@ -1759,9 +1547,10 @@ void system_information()
   lcd_puts(ssid,1);
   lcd_gotoxy(0,3);
   lcd_puts("IP: ",1);
-  lcd_puts(address_IP,1);
-  
+  lcd_puts(address_IP,1);  
 }
+
+
 void add_RFID()
 {
   
@@ -2096,6 +1885,8 @@ void RFID_returnKey()
     list_user();
   }
 }
+
+
 void check_tag_RFID()
 {
   if (bo_tag_RFID && ui32_RFID_code != 0)
@@ -2161,34 +1952,3 @@ void check_tag_RFID()
   }
 }
 
-
-char* present_day(uint8_t day)
-{
-  switch(day)
-  {
-  case 0:
-    return "SUN";
-    break;
-  case 1:
-    return "MON";
-    break;
-  case 2:
-    return "TUE";
-    break;
-  case 3:
-    return "WED";
-    break;
-  case 4:
-    return "THU";
-    break;
-  case 5:
-    return "FRI";
-    break;
-  case 6:
-    return "SAT";
-    break;
-  default:
-    return " ";
-  }
-  
-}

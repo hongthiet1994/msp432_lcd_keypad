@@ -16,7 +16,7 @@
         <ShowSource>1</ShowSource>
     </Trace1>
     <DebugChecksum>
-        <Checksum>932630293</Checksum>
+        <Checksum>3826864386</Checksum>
     </DebugChecksum>
     <Disassembly>
         <InstrCount>0</InstrCount>
@@ -71,12 +71,12 @@
         <MultiCoreRunAll>1</MultiCoreRunAll>
     </Simulator>
     <XdsDriver>
-        <xds110serialNo>M4321005</xds110serialNo>
-        <xds110foundProbes />
         <CStepIntDis>_ 0</CStepIntDis>
         <LeaveTargetRunning>_ 0</LeaveTargetRunning>
         <xdsResetStyle>0</xdsResetStyle>
         <xdsResetStrategy>1</xdsResetStrategy>
+        <xds110serialNo>M4321005</xds110serialNo>
+        <xds110foundProbes />
     </XdsDriver>
     <struct_types>
         <Fmt0>struct infor-ui8_wrong	3	0</Fmt0>
@@ -114,10 +114,6 @@
     <Breakpoints2>
         <Count>0</Count>
     </Breakpoints2>
-    <TermIOLog>
-        <LoggingEnabled>_ 0</LoggingEnabled>
-        <LogFile>_ ""</LogFile>
-    </TermIOLog>
     <LogFile>
         <LoggingEnabled>_ 0</LoggingEnabled>
         <LogFile>_ ""</LogFile>
@@ -142,4 +138,8 @@
         <Probe2>Energy</Probe2>
         <ProbeSetup2>4 1 1 10 0 0</ProbeSetup2>
     </PowerProbe>
+    <TermIOLog>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+    </TermIOLog>
 </settings>

@@ -1,58 +1,57 @@
 module_display.pbi: \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\module_display.c \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx\driverlib.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/adc14.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\stdint.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\ycheck.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\yvals.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\DLib_Defaults.h \
-  C:\\Program\ Files\ (x86)\\IAR\ Systems\\Embedded\ Workbench\ 8.3_2\\arm\\inc\\c\\DLib_Config_Normal.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\DLib_Product.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\TexasInstruments\msp.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\TexasInstruments/msp432p401r.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\TexasInstruments/msp_compatibility.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\TexasInstruments/msp432p401r_classic.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\CMSIS\Core\Include\core_cm4.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\CMSIS\Core\Include/cmsis_version.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\CMSIS\Core\Include/cmsis_compiler.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\CMSIS\Core\Include\cmsis_iccarm.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\iccarm_builtin.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\CMSIS\Core\Include/mpu_armv7.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\TexasInstruments/system_msp432p401r.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\stdbool.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/aes256.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/comp_e.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/cpu.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/crc32.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/cs.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/dma.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/eusci.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/flash.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/fpu.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/gpio.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/i2c.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/interrupt.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/mpu.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/pcm.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/pmap.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/pss.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/ref_a.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/reset.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/rom.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/rom_map.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/rtc_c.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/spi.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/sysctl.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/systick.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/timer32.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/timer_a.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/uart.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\\driverlib\MSP432P4xx/wdt_a.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\stdio.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\ysizet.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\time.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c/time32.h \
-  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\stdlib.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\lcd_st7565_lib.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\module_display.h \
   C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\DLib_Product_stdlib.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432/module_display.h \
-  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432/lcd_st7565_lib.h
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\ycheck.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\stdlib.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\time32.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\time.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\ysizet.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\stdio.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\wdt_a.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\uart.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\timer_a.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\timer32.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\systick.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\sysctl.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\spi.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\rtc_c.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\rom_map.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\rom.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\reset.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\ref_a.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\pss.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\pmap.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\pcm.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\mpu.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\interrupt.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\i2c.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\gpio.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\fpu.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\flash.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\eusci.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\dma.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\cs.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\crc32.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\cpu.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\comp_e.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\aes256.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\stdbool.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\TexasInstruments\system_msp432p401r.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\CMSIS\Core\Include\mpu_armv7.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\iccarm_builtin.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\CMSIS\Core\Include\cmsis_iccarm.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\CMSIS\Core\Include\cmsis_compiler.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\CMSIS\Core\Include\cmsis_version.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\CMSIS\Core\Include\core_cm4.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\TexasInstruments\msp432p401r_classic.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\TexasInstruments\msp_compatibility.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\TexasInstruments\msp432p401r.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\TexasInstruments\msp.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\DLib_Product.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\DLib_Defaults.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\yvals.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3_2\arm\inc\c\stdint.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\adc14.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\driverlib\MSP432P4xx\driverlib.h \
+  D:\1.PKH\1.Project\15.FPGA_HUEIC\1.Source\2.MSP432\module_display.c
