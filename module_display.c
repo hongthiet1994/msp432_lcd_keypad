@@ -7,6 +7,10 @@
 #include "module_display.h"
 #include "lcd_st7565_lib.h"
 
+
+int8_t x_blink = 0,y_blink = 0;
+
+
 extern uint8_t ui8_state;
 extern int8_t line_in_list;
 

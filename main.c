@@ -25,17 +25,17 @@
 #define LENGTH_ARRAY1           3
 #define MIN_KEY                 6
 #define MAX_KEY                 10
-#define MAX_TIME_WAITING        100
+
 #define TIME_LOCK               36000
 #define MAX_WRONG               3
 #define SIZE_KEY                10
 
 #define TOTAL                   120
-#define TIME_WAITING_KEY        600
+
 #define PRESS_ENTER_ONEC        1
 #define PRESS_ENTER_TWICE       2
 #define PRESS_ENTER_THREE       3
-#define TIME_OPEN_DOOR_S        10
+
 
 #define IP_LEN                  16
 #define SSID_LEN                32
@@ -131,13 +131,12 @@ void Time32_INT1_1ms(uint16_t t);
 
 
 
-bool bo_input_sensor= false;
-bool bo_input_pin_RFID = false;
+
 bool bo_read_complete = false;
-bool bo_tag_RFID = false;
+extern bool bo_tag_RFID;
 bool bo_check_tag = false;
 bool bo_key_role= false;
-bool bo_edge_select = true;
+extern bool bo_edge_select;
 bool press_key = false;
 bool check = false;
 bool add_user_rfid = false;
@@ -158,7 +157,8 @@ char buffer_txdata[MAX_BUFFER];
 
 
 int8_t i8_counter = 0;
-int8_t x_lcd = 0,y_lcd = 0,x_blink = 0,y_blink = 0;
+int8_t x_lcd = 0,y_lcd = 0;
+extern int8_t x_blink,y_blink;
 int8_t line_in_menu = 0;
 int8_t line_in_manage = 0;
 int8_t line_in_list = 0;
@@ -427,71 +427,6 @@ void T32_INT1_IRQHandler(void)
   Time32_INT2_1ms(300); 
 }
 
-
-void TA0_N_IRQHandler(void)
-{
-  Timer_A_clearInterruptFlag(TIMER_A0_BASE);
-  bo_input_pin_RFID = GPIO_getInputPinValue(GPIO_PORT_P2, GPIO_PIN6);
-  if(bo_input_pin_RFID)
-  {
-    
-    GPIO_interruptEdgeSelect(GPIO_PORT_P2,GPIO_PIN6,GPIO_HIGH_TO_LOW_TRANSITION);
-    bo_edge_select = true;
-  }
-  else 
-  {
-    bo_edge_select = false;
-    GPIO_interruptEdgeSelect(GPIO_PORT_P2,GPIO_PIN6,GPIO_LOW_TO_HIGH_TRANSITION);
-  }
-  
-}
-void TA1_N_IRQHandler(void)
-{
-  Timer_A_clearInterruptFlag(TIMER_A1_BASE);
-  ui8_time_open_door++;
-  bo_input_sensor = GPIO_getInputPinValue(GPIO_PORT_P2, GPIO_PIN5);
-  if(!bo_input_sensor)
-  {
-    ui8_time_open_door = TIME_OPEN_DOOR_S;
-    
-  }
-  if(ui8_time_open_door > TIME_OPEN_DOOR_S)
-  {
-    GPIO_setOutputHighOnPin(GPIO_PORT_P2, GPIO_PIN7);
-    ui8_time_open_door = 0;
-    Interrupt_disableInterrupt(INT_TA1_N);
-  }
-}
-void T32_INT2_IRQHandler(void)
-{
-  
-  Timer32_clearInterruptFlag(TIMER32_1_BASE);
-  if(ui8_state != STATE_IDLE)
-    ui16_idle++;
-  
-  if(ui16_idle > MAX_TIME_WAITING )
-  {
-    begin();
-    bo_tag_RFID = false;
-    ui16_idle = 0;
-  }
-  if(ui8_state == STATE_LOGIN|| ui8_state == STATE_ADD_USER || ui8_state == STATE_CHANGEPASS)
-  {
-    if((ui16_idle%2))
-    {
-      lcd_gotoxy(x_blink,y_blink);
-      lcd_putc('_',1);
-    }
-    else
-    {
-      lcd_gotoxy(x_blink,y_blink);
-      lcd_putc(' ',1);
-    }
-  }
-  Timer32_setCount  (TIMER32_1_BASE, 48000 * TIME_WAITING_KEY);
-  Timer32_enableInterrupt(TIMER32_1_BASE);
-  Timer32_startTimer(TIMER32_1_BASE, true);
-}
 
 // interrupt col
 void INT_PORT6_Haldler(void)

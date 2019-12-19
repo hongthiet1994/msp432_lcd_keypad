@@ -2,8 +2,20 @@
 #include <math.h>
 #include "driverlib.h"
 #include "module_timer.h"
+#include "module_display.h"
+#include "lcd_st7565_lib.h"
 
+extern uint16_t ui16_idle;
 extern uint8_t ui8_time_open_door;
+extern uint8_t ui8_state;
+extern int8_t x_blink,y_blink;
+
+
+bool bo_tag_RFID = false;
+bool bo_input_pin_RFID = false;
+bool bo_edge_select = true;
+bool bo_input_sensor= false;
+
 
 Timer_A_UpModeConfig upConfig =
 {
@@ -54,3 +66,70 @@ void Time_A1_1s()
   Timer_A_startCounter(TIMER_A1_BASE, TIMER_A_UP_MODE);
   
 }
+
+
+
+void TA0_N_IRQHandler(void)
+{
+  Timer_A_clearInterruptFlag(TIMER_A0_BASE);
+  bo_input_pin_RFID = GPIO_getInputPinValue(GPIO_PORT_P2, GPIO_PIN6);
+  if(bo_input_pin_RFID)
+  {    
+    GPIO_interruptEdgeSelect(GPIO_PORT_P2,GPIO_PIN6,GPIO_HIGH_TO_LOW_TRANSITION);
+    bo_edge_select = true;
+  }
+  else 
+  {
+    bo_edge_select = false;
+    GPIO_interruptEdgeSelect(GPIO_PORT_P2,GPIO_PIN6,GPIO_LOW_TO_HIGH_TRANSITION);
+  }
+  
+}
+void TA1_N_IRQHandler(void)
+{
+  Timer_A_clearInterruptFlag(TIMER_A1_BASE);
+  ui8_time_open_door++;
+  bo_input_sensor = GPIO_getInputPinValue(GPIO_PORT_P2, GPIO_PIN5);
+  if(!bo_input_sensor)
+  {
+    ui8_time_open_door = TIME_OPEN_DOOR_S;
+    
+  }
+  if(ui8_time_open_door > TIME_OPEN_DOOR_S)
+  {
+    GPIO_setOutputHighOnPin(GPIO_PORT_P2, GPIO_PIN7);
+    ui8_time_open_door = 0;
+    Interrupt_disableInterrupt(INT_TA1_N);
+  }
+}
+void T32_INT2_IRQHandler(void)
+{
+  
+  Timer32_clearInterruptFlag(TIMER32_1_BASE);
+  if(ui8_state != STATE_IDLE)
+    ui16_idle++;
+  
+  if(ui16_idle > MAX_TIME_WAITING )
+  {
+    begin();
+    bo_tag_RFID = false;
+    ui16_idle = 0;
+  }
+  if(ui8_state == STATE_LOGIN|| ui8_state == STATE_ADD_USER || ui8_state == STATE_CHANGEPASS)
+  {
+    if((ui16_idle%2))
+    {
+      lcd_gotoxy(x_blink,y_blink);
+      lcd_putc('_',1);
+    }
+    else
+    {
+      lcd_gotoxy(x_blink,y_blink);
+      lcd_putc(' ',1);
+    }
+  }
+  Timer32_setCount  (TIMER32_1_BASE, 48000 * TIME_WAITING_KEY);
+  Timer32_enableInterrupt(TIMER32_1_BASE);
+  Timer32_startTimer(TIMER32_1_BASE, true);
+}
+
