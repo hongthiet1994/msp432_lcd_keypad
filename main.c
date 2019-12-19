@@ -158,7 +158,7 @@ uint8_t ui8_employee_code=0;
 uint8_t ui8_employee_code_edit=0;
 uint8_t ui8_number_member = 0;
 uint8_t ui8_operation_select=0;
-extern uint8_t ui8_key_input; 
+extern uint8_t ui8_key_press; 
 uint8_t ui8_key_input_befor=0;
 uint8_t ui8_key_input_late=0;
 
@@ -240,8 +240,11 @@ int main(void)
   init_UART_ESP();  
   // init
   init_LCD();
+  
+  
   init_keybad();
-  clear_all_LCD();   
+  clear_all_LCD();
+
   begin();  
   Interrupt_enableMaster();
 
@@ -381,7 +384,7 @@ int main(void)
     }
     if(is_press_keypad)
     {
-      //process_keypad();
+      process_keypad();
       is_press_keypad = false;
     }    
   }  
@@ -427,7 +430,7 @@ void special_Keys(int a)
   if(ui8_key_input_befor == 0 )
   {
     ui16_count = 0;
-    if(a == key_enter)
+    if(a == KEY_ENTER)
     {
       ui8_press_enter ++;
       if(ui8_press_enter == PRESS_ENTER_ONEC)
@@ -627,7 +630,7 @@ void special_Keys(int a)
             employees[ui8_number_member].ui8_wrong =  0;
             employees[ui8_number_member].ui8_ID = employees[ui8_number_member -1].ui8_ID +1;
             ui8_employee_code_edit = ui8_number_member;
-            ui8_key_input = 0;
+            ui8_key_press = 0;
             add_user_rfid = true;
             add_RFID();
             
@@ -661,7 +664,7 @@ void special_Keys(int a)
       }
     } 
     // button backspace   
-    if(a == key_back)
+    if(a == KEY_BACK)
     {
       lcd_gotoxy(x_lcd, y_lcd);
       lcd_putc(' ',1);
@@ -696,7 +699,7 @@ void special_Keys(int a)
     }
     
     // button fontcase
-    if(ui8_key_input == key_case)
+    if(ui8_key_press == KEY_CASE)
     {
       ui8_key_input_befor = 0; 
       ui8_font_word++;
@@ -720,7 +723,7 @@ void special_Keys(int a)
         lcd_puts("123",0);
       }
     }
-    if(ui8_key_input == key_up && ui8_state == STATE_ADD_USER && ui8_press_enter == PRESS_ENTER_TWICE)
+    if(ui8_key_press == KEY_UP && ui8_state == STATE_ADD_USER && ui8_press_enter == PRESS_ENTER_TWICE)
     {
       lcd_clear(6,21,6,6);
       lcd_gotoxy(6,6);
@@ -729,7 +732,7 @@ void special_Keys(int a)
       lcd_puts("Member",1);
       bo_key_role = true;
     }
-    if(ui8_key_input == key_down && ui8_state == STATE_ADD_USER && ui8_press_enter == PRESS_ENTER_TWICE)
+    if(ui8_key_press == KEY_DOWN && ui8_state == STATE_ADD_USER && ui8_press_enter == PRESS_ENTER_TWICE)
     {
       lcd_clear(6,21,6,6);
       lcd_gotoxy(6,6);
@@ -738,7 +741,7 @@ void special_Keys(int a)
       lcd_puts("Member",0);
       bo_key_role = false;
     }
-    if(ui8_key_input == key_up && ui8_state == STATE_CHANGEPASS && ui8_press_enter == PRESS_ENTER_TWICE)
+    if(ui8_key_press == KEY_UP && ui8_state == STATE_CHANGEPASS && ui8_press_enter == PRESS_ENTER_TWICE)
     {
       lcd_clear(6,21,6,6);
       lcd_gotoxy(3,6);
@@ -747,7 +750,7 @@ void special_Keys(int a)
       lcd_puts("No",1);
       ui8_check = CHECK_TRUE;
     }
-    if(ui8_key_input == key_down && ui8_state == STATE_CHANGEPASS && ui8_press_enter == PRESS_ENTER_TWICE)
+    if(ui8_key_press == KEY_DOWN && ui8_state == STATE_CHANGEPASS && ui8_press_enter == PRESS_ENTER_TWICE)
     {
       lcd_clear(6,21,6,6);
       lcd_gotoxy(3,6);
@@ -899,6 +902,7 @@ void profile_user()
 
 void login()
 {  
+  ui8_state = STATE_LOGIN;  
   clear_all_LCD();
   lcd_gotoxy(0,0);
   lcd_putc(0x7f,1);
@@ -931,12 +935,14 @@ void login()
     str_key_pass[i]='\0';
   }
   i8_counter = 0;
-  ui8_state = STATE_LOGIN;
+  
   Interrupt_enableInterrupt(INT_PORT2);
   ui8_press_enter = 0;
   ui8_key_input_befor = 0;
   Time32_INT2_1ms(300);
 }
+
+
 void menu()
 {  
   clear_all_LCD();
@@ -960,13 +966,13 @@ void menu()
 void get_character()
 {
   
-  if(ui8_key_input>=key_1 && ui8_key_input <=key_0&& i8_counter <MAX_KEY)
+  if(ui8_key_press>=KEY_NUMBER_1 && ui8_key_press <=KEY_NUMBER_0&& i8_counter <MAX_KEY)
   {
     Interrupt_disableInterrupt(INT_T32_INT2);
     Timer32_disableInterrupt(TIMER32_1_BASE);
     Time32_INT1_1ms(TIME_WAITING_KEY);
     lcd_clear(0,21,7,7);
-    if(ui8_key_input == ui8_key_input_befor)
+    if(ui8_key_press == ui8_key_input_befor)
     {
       
       ui16_count++;
@@ -977,17 +983,17 @@ void get_character()
       
       if((ui8_font_word%3)==0)
       {
-        ui8_key_input_late = key3[ui8_key_input-1][ui16_count -1];
+        ui8_key_input_late = key3[ui8_key_press-1][ui16_count -1];
       }
       else if ((ui8_font_word%3)==1)
       {
-        ui8_key_input_late = key2[ui8_key_input-1][ui16_count -1];
+        ui8_key_input_late = key2[ui8_key_press-1][ui16_count -1];
       }
       else
       {
         if(ui8_press_enter == 0)
         {
-          ui8_key_input_late = ui8_key_input + 48;
+          ui8_key_input_late = ui8_key_press + 48;
           if(ui8_key_input_late == 58)
           {
             ui8_key_input_late = 48;
@@ -996,7 +1002,7 @@ void get_character()
         }
         else
         {
-          ui8_key_input_late = ui8_key_input + 48;
+          ui8_key_input_late = ui8_key_press + 48;
           if(ui8_key_input_late == 58)
           {
             ui8_key_input_late = 48;
@@ -1006,7 +1012,7 @@ void get_character()
           lcd_putc('*',1);
         }
         i8_counter++;
-        ui8_key_input_late = ui8_key_input+48;
+        ui8_key_input_late = ui8_key_press+48;
         if(ui8_key_input_late ==58)
         {
           ui8_key_input_late = 48;
@@ -1023,15 +1029,15 @@ void get_character()
       ui16_count = 1;
       if((ui8_font_word%3)==0)
       {
-        ui8_key_input_late = key3[ui8_key_input-1][ui16_count -1];
+        ui8_key_input_late = key3[ui8_key_press-1][ui16_count -1];
       }
       else if ((ui8_font_word%3)== 1)
       {
-        ui8_key_input_late = key2[ui8_key_input-1][ui16_count -1];
+        ui8_key_input_late = key2[ui8_key_press-1][ui16_count -1];
       }
       else
       {
-        ui8_key_input_late = ui8_key_input+48;
+        ui8_key_input_late = ui8_key_press+48;
         if(ui8_key_input_late == 58)
         {
           ui8_key_input_late = 48;
@@ -1094,15 +1100,15 @@ void get_character()
       x_lcd++;
       if((ui8_font_word%3) == 0)
       {
-        ui8_key_input_late = key3[ui8_key_input-1][ui16_count -1];
+        ui8_key_input_late = key3[ui8_key_press-1][ui16_count -1];
       }
       else if ((ui8_font_word%3)==1)
       {
-        ui8_key_input_late = key2[ui8_key_input-1][ui16_count -1];
+        ui8_key_input_late = key2[ui8_key_press-1][ui16_count -1];
       }
       else
       {
-        ui8_key_input_late = ui8_key_input+48;
+        ui8_key_input_late = ui8_key_press+48;
         if(ui8_key_input_late == 58) 
         {
           ui8_key_input_late = 48;
@@ -1111,11 +1117,11 @@ void get_character()
       lcd_gotoxy(x_lcd, y_lcd);
       lcd_putc(ui8_key_input_late,1); 
     }
-    ui8_key_input_befor = ui8_key_input;
+    ui8_key_input_befor = ui8_key_press;
   }
   else 
   {
-    special_Keys(ui8_key_input);
+    special_Keys(ui8_key_press);
   }
   y_blink = y_lcd;
   x_blink = x_lcd;
@@ -1279,7 +1285,7 @@ void add_RFID()
 }
 void list_returnKey()
 {
-  if(ui8_key_input == key_up)
+  if(ui8_key_press == KEY_UP)
   {
     lcd_clear(0,21,2,6);
     line_in_list--;
@@ -1321,7 +1327,7 @@ void list_returnKey()
     lcd_gotoxy(14,((int)((float)line_in_list/(float)ui8_number_member)*5+2));
     lcd_putc('|',1);
   }
-  else if(ui8_key_input == key_down)
+  else if(ui8_key_press == KEY_DOWN)
   {
     lcd_clear(0,21,2,6);
     line_in_list++;
@@ -1364,12 +1370,12 @@ void list_returnKey()
     lcd_gotoxy(14,((int)((float)line_in_list/(float)ui8_number_member)*5+2));
     lcd_putc('|',1);
   }
-  else if(ui8_key_input == key_back)
+  else if(ui8_key_press == KEY_BACK)
   {
     line_in_list = 0;
     manage_user();
   }
-  else if(ui8_key_input == key_select)
+  else if(ui8_key_press == KEY_SELECT)
   {
     ui8_employee_code_edit = line_in_list;
     if(ui8_operation_select == line0)
@@ -1397,7 +1403,7 @@ void list_returnKey()
 }
 void manage_returnKey()
 {
-  if(ui8_key_input == key_up)
+  if(ui8_key_press == KEY_UP)
   {
     lcd_clear(0,21,2,7);
     line_in_manage--;
@@ -1413,7 +1419,7 @@ void manage_returnKey()
     lcd_gotoxy(0,line_in_manage+2);
     lcd_puts(list_edit[line_in_manage],0);
   }
-  if(ui8_key_input == key_down)
+  if(ui8_key_press == KEY_DOWN)
   {
     lcd_clear(0,21,2,7);
     line_in_manage++;
@@ -1429,12 +1435,12 @@ void manage_returnKey()
     lcd_gotoxy(0,line_in_manage+2);
     lcd_puts(list_edit[line_in_manage],0);
   }
-  if(ui8_key_input == key_back)
+  if(ui8_key_press == KEY_BACK)
   {
     line_in_manage = 0;
     menu();
   }
-  if(ui8_key_input == key_select)
+  if(ui8_key_press == KEY_SELECT)
   {
     ui8_operation_select = line_in_manage;
     if(ui8_operation_select!=line5)
@@ -1449,7 +1455,7 @@ void manage_returnKey()
 }
 void delete_returnKey()
 {
-  if(ui8_key_input == key_enter)
+  if(ui8_key_press == KEY_ENTER)
   {
     for(i=ui8_employee_code_edit;i<ui8_number_member-1;i++)
     {
@@ -1472,14 +1478,14 @@ void delete_returnKey()
       list_user();
     }
   }
-  else if(ui8_key_input == key_back)
+  else if(ui8_key_press == KEY_BACK)
   {
     list_user();
   }
 }
 void menu_returnKey()
 {
-  if(ui8_key_input == key_select)
+  if(ui8_key_press == KEY_SELECT)
   {
     if(line_in_menu == line0)
     {
@@ -1495,12 +1501,12 @@ void menu_returnKey()
       
     }
   }
-  if(ui8_key_input == key_back)
+  if(ui8_key_press == KEY_BACK)
   {
     begin();
     bo_tag_RFID = false;
   }
-  else if(ui8_key_input == key_up)
+  else if(ui8_key_press == KEY_UP)
   {
     line_in_menu--;
     if(line_in_menu < 0)
@@ -1513,7 +1519,7 @@ void menu_returnKey()
     lcd_gotoxy(0,line_in_menu+2);
     lcd_puts(list_menu[line_in_menu],0);
   }
-  else if(ui8_key_input == key_down)
+  else if(ui8_key_press == KEY_DOWN)
   {
     line_in_menu++;
     if(line_in_menu > LENGTH_ARRAY1-1)
@@ -1529,7 +1535,7 @@ void menu_returnKey()
 }
 void profile_returnKey()
 {
-  if(ui8_key_input == key_back)
+  if(ui8_key_press == KEY_BACK)
   {
     list_user();
   }
@@ -1573,13 +1579,13 @@ void RFID_returnKey()
       
     }
   }
-  if(ui8_key_input == key_back )
+  if(ui8_key_press == KEY_BACK )
   {
     
     list_user();
     Interrupt_disableInterrupt(INT_PORT2);
   }
-  if(ui8_key_input == key_enter )
+  if(ui8_key_press == KEY_ENTER )
   {
     employees[ui8_employee_code_edit].ui32_RFID = ui32_RFID_code;
     ui32_RFID_code = 0;

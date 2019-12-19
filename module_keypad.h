@@ -22,22 +22,22 @@
 
 enum NUMBER_KEY
 {
-  key_1 = 1,
-  key_2,
-  key_3,
-  key_4,
-  key_5,
-  key_6,
-  key_7,
-  key_8,
-  key_9,
-  key_0,
-  key_case,
-  key_enter,
-  key_up,
-  key_down,
-  key_select,
-  key_back
+  KEY_NUMBER_1 = 1,
+  KEY_NUMBER_2,
+  KEY_NUMBER_3,
+  KEY_NUMBER_4,
+  KEY_NUMBER_5,
+  KEY_NUMBER_6,
+  KEY_NUMBER_7,
+  KEY_NUMBER_8,
+  KEY_NUMBER_9,
+  KEY_NUMBER_0,
+  KEY_CASE,
+  KEY_ENTER,
+  KEY_UP,
+  KEY_DOWN,
+  KEY_SELECT,
+  KEY_BACK
 };
 void init_keybad();
 void scan_row( uint16_t x);

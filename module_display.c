@@ -9,7 +9,7 @@
 #include "module_keypad.h"
 
 // For keypad
-extern uint8_t ui8_key_input;
+extern uint8_t ui8_key_press;
 
 // For display
 extern uint16_t ui16_idle;
@@ -140,7 +140,7 @@ void process_keypad(void)
   switch (ui8_state)
   {
   case STATE_IDLE :
-    if(ui8_key_input == key_enter)
+    if(ui8_key_press == KEY_ENTER)
     {
       login();
     }
@@ -154,7 +154,7 @@ void process_keypad(void)
     menu_returnKey();
     break;
   case STATE_INFOR :
-    if(ui8_key_input == key_back)
+    if(ui8_key_press == KEY_BACK)
     {
       menu();
     }
@@ -181,7 +181,7 @@ void process_keypad(void)
     RFID_returnKey();
     break;
   case STATE_CHOOSE : 
-    if(ui8_key_input==key_enter)
+    if(ui8_key_press == KEY_ENTER)
     {
       ui16_idle = 0;
       menu();

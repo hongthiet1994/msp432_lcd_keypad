@@ -12,7 +12,7 @@ bool is_press_keypad = false;
 extern uint16_t ui16_idle;
 extern uint8_t ui8_state;
 
-uint8_t ui8_key_input = 0; 
+uint8_t ui8_key_press = 0; 
 uint16_t ui16_status = 0;
 
 const unsigned int  key1[4][4] =
@@ -77,7 +77,7 @@ void scan_row(uint16_t x)
   GPIO_setOutputHighOnPin(KEYPAD_PORT_ROW, KEYPAD_PIN_ROW_4);
   if(!GPIO_getInputPinValue(GPIO_PORT_P6,ui16_status))
   {
-    ui8_key_input = key1[0][x-1];
+    ui8_key_press = key1[0][x-1];
     //returnKey();
   }
   
@@ -86,7 +86,7 @@ void scan_row(uint16_t x)
   if(!GPIO_getInputPinValue(KEYPAD_PORT_COL,ui16_status))
   {
     
-    ui8_key_input = key1[1][x-1];
+    ui8_key_press = key1[1][x-1];
     // returnKey();
   }
   
@@ -94,14 +94,14 @@ void scan_row(uint16_t x)
   GPIO_setOutputHighOnPin(KEYPAD_PORT_ROW, KEYPAD_PIN_ROW_2);
   if(!GPIO_getInputPinValue(KEYPAD_PORT_COL,ui16_status))
   {
-    ui8_key_input = key1[2][x-1];
+    ui8_key_press = key1[2][x-1];
     // returnKey();
   }
   GPIO_setOutputLowOnPin(KEYPAD_PORT_ROW, KEYPAD_PIN_ROW_4);
   GPIO_setOutputHighOnPin(KEYPAD_PORT_ROW, KEYPAD_PIN_ROW_3);
   if(!GPIO_getInputPinValue(KEYPAD_PORT_COL,ui16_status))
   {
-    ui8_key_input = key1[3][x-1];
+    ui8_key_press = key1[3][x-1];
     //returnKey();
   }
   GPIO_setOutputLowOnPin(KEYPAD_PORT_ROW,GPIO_PIN1+GPIO_PIN0+GPIO_PIN4+GPIO_PIN5);
