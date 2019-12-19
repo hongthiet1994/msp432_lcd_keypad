@@ -110,3 +110,17 @@ void init_LCD(void)
   lcd_write(0,0xAF); 
   lcd_write(0,0x2F); 
 }
+
+void display_screen_delete_user()
+{  
+  ui8_state = STATE_DELETE;
+  clear_all_LCD();  
+  lcd_gotoxy(2,2);
+  lcd_puts("Are you sure want ",1);
+  lcd_gotoxy(3,3); 
+  lcd_puts("delete this user",1);
+  lcd_gotoxy(4,5);
+  lcd_puts("Yes: Enter",1);
+  lcd_gotoxy(4,6);
+  lcd_puts("No : Back",1);
+}

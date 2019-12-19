@@ -113,7 +113,7 @@ void write_flash();
 void add_RFID();
 void change_password();
 void lock_unlock_user();
-void delete_user();
+
 void list_user();
 void manage_user();
 void add_user();
@@ -996,21 +996,7 @@ void change_password()
 // The function return mode = mode_delete and screen :
 
 */
-void delete_user()
-{
-  
-  ui8_state = STATE_DELETE;
-  clear_all_LCD();
-  
-  lcd_gotoxy(2,2);
-  lcd_puts("Are you sure want ",1);
-  lcd_gotoxy(3,3); 
-  lcd_puts("delete this user",1);
-  lcd_gotoxy(4,5);
-  lcd_puts("Yes: Enter",1);
-  lcd_gotoxy(4,6);
-  lcd_puts("No : Back",1);
-}
+
 void lock_unlock_user()
 {
   
@@ -1558,7 +1544,7 @@ void list_returnKey()
     }
     if(ui8_operation_select == line2)
     {
-      delete_user();
+      display_screen_delete_user();
     }
     if(ui8_operation_select == line3)
     {
