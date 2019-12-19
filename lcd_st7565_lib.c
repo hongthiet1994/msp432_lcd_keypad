@@ -262,7 +262,7 @@ void lcd_clear(uint8_t x1,uint8_t x2,uint8_t y1, uint8_t y2)
 // function to delete full screen
 // return NULL
 */
-void lcd_clear_all()
+void clear_all_LCD()
 {
   lcd_clear(0,21,0,7);
 }

@@ -5,5 +5,5 @@
 #include <time.h>
 #include <stdlib.h>
 
-
+void init_RTC();
 time_t getsec(RTC_C_Calendar x);

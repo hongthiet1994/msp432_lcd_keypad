@@ -53,16 +53,7 @@ extern char  logo [] ;
 
 
 extern RTC_C_Calendar newTime;
-const RTC_C_Calendar currentTime =
-{
-  0,
-  10,
-  11,
-  4,
-  5,
-  9,
-  2019
-};
+
 
 
 
@@ -252,34 +243,21 @@ int main(void)
   GPIO_setOutputHighOnPin(GPIO_PORT_P2, GPIO_PIN7);
   GPIO_setAsInputPinWithPullUpResistor(GPIO_PORT_P2, GPIO_PIN5);
   GPIO_disableInterrupt(GPIO_PORT_P2, GPIO_PIN5);
+  
   // config RTC
   GPIO_setAsPeripheralModuleFunctionOutputPin(GPIO_PORT_PJ,
                                               GPIO_PIN0 | GPIO_PIN1, GPIO_PRIMARY_MODULE_FUNCTION);
   CS_setExternalClockSourceFrequency(32000,48000000);
   CS_startLFXT(false);
   
-  RTC_C_initCalendar(&currentTime, RTC_C_FORMAT_BINARY);
-  newTime = currentTime;
-  RTC_C_setCalendarEvent(RTC_C_CALENDAREVENT_MINUTECHANGE);
-  RTC_C_clearInterruptFlag(
-                           RTC_C_CLOCK_READ_READY_INTERRUPT|RTC_C_TIME_EVENT_INTERRUPT
-                             | RTC_C_CLOCK_ALARM_INTERRUPT);
-  RTC_C_enableInterrupt(
-                        RTC_C_CLOCK_READ_READY_INTERRUPT|RTC_C_TIME_EVENT_INTERRUPT
-                          | RTC_C_CLOCK_ALARM_INTERRUPT);
-  RTC_C_startClock();
-  Interrupt_enableInterrupt(INT_RTC_C);
- 
+  init_RTC(); 
   init_TIMER();
-  init_UART_ESP();
-  
+  init_UART_ESP();  
   // init
   init_LCD();
   init_keybad();
-  lcd_clear_all(); 
-  
-  begin();
-  
+  clear_all_LCD();   
+  begin();  
   Interrupt_enableMaster();
   
   while(1)
@@ -795,7 +773,7 @@ void special_Keys(int a)
               Time_A1_1s();
               if(employees[ui8_employee_code].bo_role)
               {
-                lcd_clear_all();
+                clear_all_LCD();
                 lcd_gotoxy(5,2);
                 lcd_puts(employees[ui8_employee_code].ch_user,1);
                 lcd_gotoxy(1,4);
@@ -810,7 +788,7 @@ void special_Keys(int a)
               
               else
               {
-                lcd_clear_all();
+                clear_all_LCD();
                 lcd_gotoxy(5,2);
                 lcd_puts(employees[ui8_employee_code].ch_user,1);
                 lcd_gotoxy(1,4);
@@ -1071,7 +1049,7 @@ void Time32_INT2_1ms(uint16_t t)
 */
 void change_password()
 {  
-  lcd_clear_all();
+  clear_all_LCD();
   lcd_gotoxy(0,0);
   lcd_putc(0x7f,1);
   lcd_gotoxy(2,0);
@@ -1116,7 +1094,7 @@ void delete_user()
 {
   
   ui8_state = STATE_DELETE;
-  lcd_clear_all();
+  clear_all_LCD();
   
   lcd_gotoxy(2,2);
   lcd_puts("Are you sure want ",1);
@@ -1149,7 +1127,7 @@ void profile_user()
 {
   
   ui8_state = STATE_PROFILE;
-  lcd_clear_all();
+  clear_all_LCD();
   lcd_gotoxy(0,0);
   lcd_putc(0x7f,1);
   lcd_gotoxy(3,0);
@@ -1191,7 +1169,7 @@ void profile_user()
 
 void login()
 {  
-  lcd_clear_all();
+  clear_all_LCD();
   lcd_gotoxy(0,0);
   lcd_putc(0x7f,1);
   lcd_gotoxy(8,0);
@@ -1231,7 +1209,7 @@ void login()
 }
 void menu()
 {  
-  lcd_clear_all();
+  clear_all_LCD();
   lcd_gotoxy(0,0);
   lcd_putc(0x7f,1);
   lcd_gotoxy(20,0);
@@ -1427,7 +1405,7 @@ void list_user()
 {
   
   ui8_state = STATE_LIST;
-  lcd_clear_all();
+  clear_all_LCD();
   lcd_gotoxy(0,0);
   lcd_putc(0x7f,1);
   lcd_gotoxy(20,0);
@@ -1474,7 +1452,7 @@ void list_user()
 }
 void manage_user()
 {
-  lcd_clear_all();  
+  clear_all_LCD();  
   lcd_gotoxy(0,0);
   lcd_putc(0x7f,1);
   lcd_gotoxy(20,0);
@@ -1495,7 +1473,7 @@ void add_user()
 {
   
   ui8_state = STATE_ADD_USER;
-  lcd_clear_all();
+  clear_all_LCD();
   lcd_gotoxy(0,0);
   lcd_putc(0x7f,1);
   lcd_gotoxy(2,0);
@@ -1537,7 +1515,7 @@ void system_information()
 {
   send_string_UART("{\"CMD\":1}");   
   ui8_state = STATE_INFOR;
-  lcd_clear_all();
+  clear_all_LCD();
   lcd_gotoxy(0,0);
   lcd_putc(0x7f,1);
   lcd_gotoxy(2,0);
@@ -1555,7 +1533,7 @@ void add_RFID()
 {
   
   ui32_RFID_code = 0;
-  lcd_clear_all();
+  clear_all_LCD();
   lcd_gotoxy(0,0);
   lcd_putc(0x7f,1);
   lcd_gotoxy(4,0);
@@ -1910,7 +1888,7 @@ void check_tag_RFID()
       Time_A1_1s();
       if(employees[ui8_employee_code].bo_role)
       {
-        lcd_clear_all();
+        clear_all_LCD();
         lcd_gotoxy(6,2);
         lcd_puts(employees[ui8_employee_code].ch_user,1);
         lcd_gotoxy(1,4);
@@ -1924,7 +1902,7 @@ void check_tag_RFID()
       }
       else
       {
-        lcd_clear_all();
+        clear_all_LCD();
         lcd_gotoxy(6,2);
         lcd_puts(employees[ui8_employee_code].ch_user,1);
         lcd_gotoxy(1,4);
@@ -1940,7 +1918,7 @@ void check_tag_RFID()
       bo_tag_RFID = false;
       ui32_RFID_code = 0;
       bo_check_tag = 0;
-      lcd_clear_all();
+      clear_all_LCD();
       lcd_gotoxy(3,3);
       lcd_puts("Acces Denied",1);
       ui8_state = STATE_WAWITING;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <fileVersion>4</fileVersion>
-    <fileChecksum>2243554506</fileChecksum>
+    <fileChecksum>455205165</fileChecksum>
     <configuration>
         <name>Debug</name>
         <outputs>
@@ -127,6 +127,7 @@
             <file>$PROJ_DIR$\ewarm\Obj\module_itoa.xcl</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_itoa.o</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_flash.o</file>
+            <file>$PROJ_DIR$\ewarm\Obj\module_control_door.__cstat.et</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_itoa.__cstat.et</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_keypad.xcl</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_keypad.o</file>
@@ -138,8 +139,12 @@
             <file>$PROJ_DIR$\module_rfid.c</file>
             <file>$PROJ_DIR$\module_itoa.c</file>
             <file>$PROJ_DIR$\module_itoa.h</file>
+            <file>$PROJ_DIR$\module_control_door.c</file>
+            <file>$PROJ_DIR$\module_control_door.h</file>
             <file>$PROJ_DIR$\module_keypad.h</file>
             <file>$PROJ_DIR$\module_keypad.c</file>
+            <file>$PROJ_DIR$\ewarm\Obj\module_control_door.xcl</file>
+            <file>$PROJ_DIR$\ewarm\Obj\module_control_door.o</file>
         </outputs>
         <file>
             <name>[ROOT_NODE]</name>
@@ -284,7 +289,7 @@
             <inputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 38 87 59 75 49 92 110 94 64 111 14 43 41 98 63 91 133 57 5 40 10 65 108 35 113 28 36 107 8 60 93 39 85 50 44 33 42 46 3 51 55 74 81 69 66 12 37 30 54 71 97 114 45 62 52 13 109 68 7 95 24 4 20 23 27 132 22</file>
+                    <file> 38 87 59 75 49 92 110 94 64 111 14 43 41 98 63 91 136 57 5 40 10 65 108 35 113 28 36 107 8 60 93 39 85 50 44 33 42 46 3 51 55 74 81 69 66 12 37 30 54 71 97 114 45 62 52 13 109 68 7 95 24 4 20 23 27 133 22</file>
                 </tool>
             </inputs>
         </file>
@@ -391,7 +396,7 @@
             <inputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 47 34 79 96 77 121 120 124 129 89 106 31 18 29 56 103 112 67 58</file>
+                    <file> 47 34 79 96 139 77 121 120 125 130 89 106 31 18 29 56 103 112 67 58</file>
                 </tool>
             </inputs>
         </file>
@@ -417,7 +422,7 @@
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 129</file>
+                    <file> 130</file>
                 </tool>
                 <tool>
                     <name>__cstat</name>
@@ -425,7 +430,7 @@
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 128</file>
+                    <file> 129</file>
                 </tool>
             </outputs>
         </file>
@@ -438,7 +443,7 @@
                 </tool>
                 <tool>
                     <name>__cstat</name>
-                    <file> 122</file>
+                    <file> 123</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
@@ -448,7 +453,30 @@
             <inputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 38 87 59 75 49 92 110 94 132</file>
+                    <file> 38 87 59 75 49 92 110 94 133</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_control_door.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 139</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 122</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 138</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 135</file>
                 </tool>
             </inputs>
         </file>
@@ -457,7 +485,7 @@
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 124</file>
+                    <file> 125</file>
                 </tool>
                 <tool>
                     <name>__cstat</name>
@@ -465,13 +493,13 @@
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 123</file>
+                    <file> 124</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 57 5 43 87 59 75 49 92 40 10 65 108 35 113 28 36 107 8 60 41 93 39 85 50 44 33 42 46 3 51 55 74 81 69 66 12 37 30 54 71 97 114 45 62 52 13 109 68 98 110 7 95 63 91 133</file>
+                    <file> 57 5 43 87 59 75 49 92 40 10 65 108 35 113 28 36 107 8 60 41 93 39 85 50 44 33 42 46 3 51 55 74 81 69 66 12 37 30 54 71 97 114 45 62 52 13 109 68 98 110 7 95 63 91 136</file>
                 </tool>
             </inputs>
         </file>

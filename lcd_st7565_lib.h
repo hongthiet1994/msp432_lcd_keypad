@@ -17,5 +17,5 @@ void glcd_gotoxy(uint8_t x, uint8_t y);
 void lcd_putc(uint16_t data,bool color);
 void lcd_puts(char *s,bool color);
 void lcd_clear(uint8_t x1,uint8_t y1,uint8_t x2, uint8_t y2);
-void lcd_clear_all();
+void clear_all_LCD();
 void lcd_write(bool cd, uint8_t byte);

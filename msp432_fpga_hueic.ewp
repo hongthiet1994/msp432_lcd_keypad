@@ -2139,6 +2139,12 @@
             <name>$PROJ_DIR$\main.h</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\module_control_door.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_control_door.h</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\module_display.c</name>
         </file>
         <file>

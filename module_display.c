@@ -86,7 +86,7 @@ void begin()
 {  
   Interrupt_disableInterrupt(INT_T32_INT2);
   Timer32_disableInterrupt(TIMER32_1_BASE);
-  lcd_clear_all(); 
+  clear_all_LCD(); 
   glcd_gotoxy(0,0);
   lcd_image(0,0,logo,128,64);
   ui8_state = STATE_IDLE;

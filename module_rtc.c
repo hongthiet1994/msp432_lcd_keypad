@@ -13,6 +13,31 @@ char * DaysOfWeek[] = { "SUN", "MON", "TUE", "WED", "THU","FRI","SAT" };
 
 RTC_C_Calendar newTime;
 
+const RTC_C_Calendar currentTime =
+{
+  0,
+  10,
+  11,
+  4,
+  5,
+  9,
+  2019
+};
+
+void init_RTC()
+{
+RTC_C_initCalendar(&currentTime, RTC_C_FORMAT_BINARY);
+  newTime = currentTime;
+  RTC_C_setCalendarEvent(RTC_C_CALENDAREVENT_MINUTECHANGE);
+  RTC_C_clearInterruptFlag(
+                           RTC_C_CLOCK_READ_READY_INTERRUPT|RTC_C_TIME_EVENT_INTERRUPT
+                             | RTC_C_CLOCK_ALARM_INTERRUPT);
+  RTC_C_enableInterrupt(
+                        RTC_C_CLOCK_READ_READY_INTERRUPT|RTC_C_TIME_EVENT_INTERRUPT
+                          | RTC_C_CLOCK_ALARM_INTERRUPT);
+  RTC_C_startClock();
+  Interrupt_enableInterrupt(INT_RTC_C);
+}
 void RTC_C_IRQHandler(void)
 {
   uint32_t status;
