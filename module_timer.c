@@ -11,7 +11,7 @@ extern uint8_t ui8_state;
 extern int8_t x_blink,y_blink;
 
 
-bool bo_tag_RFID = false;
+extern bool bo_tag_RFID;
 bool bo_input_pin_RFID = false;
 bool bo_edge_select = true;
 bool bo_input_sensor= false;

@@ -6,8 +6,13 @@
 #include <stdlib.h>
 #include "module_display.h"
 #include "lcd_st7565_lib.h"
+#include "module_keypad.h"
 
+// For keypad
+extern uint8_t ui8_key_input;
 
+// For display
+extern uint16_t ui16_idle;
 int8_t x_blink = 0,y_blink = 0;
 
 
@@ -123,4 +128,67 @@ void display_screen_delete_user()
   lcd_puts("Yes: Enter",1);
   lcd_gotoxy(4,6);
   lcd_puts("No : Back",1);
+}
+
+
+
+/*
+// The function returns the function of the key that corresponds to each mode
+*/
+void process_keypad(void)
+{
+  switch (ui8_state)
+  {
+  case STATE_IDLE :
+    if(ui8_key_input == key_enter)
+    {
+      login();
+    }
+    check_tag_RFID();
+    break;
+  case STATE_LOGIN :
+    get_character();
+    check_tag_RFID(); 
+    break;
+  case STATE_MENU :
+    menu_returnKey();
+    break;
+  case STATE_INFOR :
+    if(ui8_key_input == key_back)
+    {
+      menu();
+    }
+    break;
+  case STATE_PROFILE :
+    profile_returnKey();
+    break;
+  case STATE_ADD_USER :
+    get_character();
+    break;
+  case STATE_MANAGE :
+    manage_returnKey();
+    break;
+  case STATE_DELETE :
+    delete_returnKey();
+    break;
+  case STATE_CHANGEPASS :
+    get_character();
+    break;
+  case STATE_LIST :
+    list_returnKey();
+    break;
+  case STATE_ADD_RFID_CODE :
+    RFID_returnKey();
+    break;
+  case STATE_CHOOSE : 
+    if(ui8_key_input==key_enter)
+    {
+      ui16_idle = 0;
+      menu();
+    }
+    break;
+  default :
+    break;
+  }
+  
 }

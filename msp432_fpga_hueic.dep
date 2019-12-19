@@ -6,16 +6,9 @@
         <name>Debug</name>
         <outputs>
             <file>$PROJ_DIR$\ewarm\Obj\json_parse.o</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\fpu.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\reset.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\dma.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\adc14.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\pss.h</file>
             <file>$PROJ_DIR$\module_timer.c</file>
-            <file>$TOOLKIT_DIR$\inc\c\time.h</file>
             <file>$PROJ_DIR$\module_rfid.c</file>
             <file>$PROJ_DIR$\module_keypad.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\timer_a.h</file>
             <file>$PROJ_DIR$\ewarm\Obj\startup_msp432p401r_ewarm.o</file>
             <file>$PROJ_DIR$\module_flash.c</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_uart.o</file>
@@ -28,14 +21,8 @@
             <file>$PROJ_DIR$\startup_msp432p401r_ewarm.c</file>
             <file>$PROJ_DIR$\system_msp432p401r.c</file>
             <file>$PROJ_DIR$\module_rfid.h</file>
-            <file>$PROJ_DIR$\ewarm\Obj\main.__cstat.et</file>
             <file>$PROJ_DIR$\module_itoa.h</file>
             <file>$PROJ_DIR$\module_uart.h</file>
-            <file>$TOOLKIT_DIR$\CMSIS\Core\Include\mpu_armv7.h</file>
-            <file>$PROJ_DIR$\ewarm\Obj\module_uart.__cstat.et</file>
-            <file>$TOOLKIT_DIR$\inc\TexasInstruments\msp432p401r.h</file>
-            <file>$TOOLKIT_DIR$\CMSIS\Core\Include\cmsis_compiler.h</file>
-            <file>$PROJ_DIR$\ewarm\Obj\system_msp432p401r.__cstat.et</file>
             <file>$PROJ_DIR$\module_keypad.c</file>
             <file>$PROJ_DIR$\main.c</file>
             <file>$PROJ_DIR$\main.h</file>
@@ -50,103 +37,39 @@
             <file>$PROJ_DIR$\json_parse.h</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_rfid.o</file>
             <file>$PROJ_DIR$\ewarm\Obj\main.xcl</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\spi.h</file>
-            <file>$PROJ_DIR$\ewarm\Obj\module_rfid.__cstat.et</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_itoa.o</file>
             <file>$PROJ_DIR$\ewarm\Exe\main.out</file>
-            <file>$TOOLKIT_DIR$\inc\c\DLib_float_setup.h</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_itoa.xcl</file>
-            <file>$PROJ_DIR$\ewarm\Obj\module_keypad.__cstat.et</file>
-            <file>$TOOLKIT_DIR$\inc\c\iccarm_builtin.h</file>
-            <file>$TOOLKIT_DIR$\lib\rt7M_tl.a</file>
-            <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
-            <file>$PROJ_DIR$\ewarm\Obj\module_flash.__cstat.et</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_flash.xcl</file>
-            <file>$PROJ_DIR$\ewarm\Obj\module_control_door.__cstat.et</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_rfid.xcl</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_control_door.xcl</file>
-            <file>$TOOLKIT_DIR$\CMSIS\Core\Include\cmsis_version.h</file>
-            <file>$TOOLKIT_DIR$\inc\TexasInstruments\msp432p401r_classic.h</file>
-            <file>$TOOLKIT_DIR$\lib\shb_l.a</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_flash.o</file>
-            <file>$PROJ_DIR$\ewarm\Obj\module_itoa.__cstat.et</file>
             <file>$PROJ_DIR$\ewarm\Exe\msp432_fpga_hueic.bin</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_timer.o</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_keypad.xcl</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_keypad.o</file>
-            <file>$PROJ_DIR$\ewarm\Obj\lcd_st7565_lib.__cstat.et</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_control_door.o</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\uart.h</file>
-            <file>$TOOLKIT_DIR$\lib\m7M_tls.a</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\interrupt.h</file>
-            <file>$PROJ_DIR$\ewarm\Obj\module_display.__cstat.et</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\rom_map.h</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_uart.xcl</file>
-            <file>$PROJ_DIR$\ewarm\Obj\json_parse.__cstat.et</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\mpu.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\cpu.h</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_rtc.o</file>
             <file>$PROJ_DIR$\ewarm\Obj\msp432_fpga_hueic.pbd</file>
-            <file>$TOOLKIT_DIR$\inc\c\DLib_Product_stdlib.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\aes256.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_display.o</file>
-            <file>$PROJ_DIR$\ewarm\Obj\module_rtc.__cstat.et</file>
-            <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\DLib_Product_string.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\time32.h</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_display.xcl</file>
             <file>$PROJ_DIR$\ewarm\Obj\main.o</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\rtc_c.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\stdio.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\pmap.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\wdt_a.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\pcm.h</file>
             <file>$PROJ_DIR$\ewarm\Obj\lcd_st7565_lib.xcl</file>
-            <file>$PROJ_DIR$\ewarm\Obj\module_timer.__cstat.et</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_rtc.xcl</file>
-            <file>$PROJ_DIR$\ewarm\Obj\startup_msp432p401r_ewarm.__cstat.et</file>
             <file>$PROJ_DIR$\ewarm\Obj\lcd_st7565_lib.o</file>
             <file>$PROJ_DIR$\ewarm\Obj\module_timer.xcl</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\i2c.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\rom.h</file>
-            <file>$TOOLKIT_DIR$\lib\dl7M_tln.a</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\sysctl.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\comp_e.h</file>
-            <file>$PROJ_DIR$\driverlib_empty_project_ewarm.icf</file>
             <file>$PROJ_DIR$\ewarm\Obj\system_msp432p401r.xcl</file>
-            <file>$TOOLKIT_DIR$\inc\c\stdbool.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\eusci.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\cs.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\flash.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\crc32.h</file>
             <file>$PROJ_DIR$\ewarm\Obj\startup_msp432p401r_ewarm.xcl</file>
             <file>$PROJ_DIR$\ewarm\Obj\system_msp432p401r.o</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\driverlib.h</file>
-            <file>$TOOLKIT_DIR$\CMSIS\Core\Include\core_cm4.h</file>
-            <file>$TOOLKIT_DIR$\inc\TexasInstruments\msp.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\systick.h</file>
-            <file>$TOOLKIT_DIR$\inc\TexasInstruments\msp_compatibility.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\ref_a.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Normal.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
-            <file>$TOOLKIT_DIR$\inc\TexasInstruments\system_msp432p401r.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\timer32.h</file>
-            <file>$PROJ_DIR$\driverlib\MSP432P4xx\gpio.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\stdlib.h</file>
-            <file>$TOOLKIT_DIR$\CMSIS\Core\Include\cmsis_iccarm.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\string.h</file>
             <file>$PROJ_DIR$\ewarm\Obj\json_parse.xcl</file>
-            <file>$TOOLKIT_DIR$\inc\c\math.h</file>
         </outputs>
         <file>
             <name>[ROOT_NODE]</name>
             <outputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 48</file>
+                    <file> 33</file>
                 </tool>
             </outputs>
         </file>
@@ -155,38 +78,24 @@
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 66</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 99</file>
+                    <file> 40</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 103</file>
+                    <file> 53</file>
                 </tool>
             </outputs>
-            <inputs>
-                <tool>
-                    <name>ICCARM</name>
-                    <file> 132 83 126 85 125 88 54 89 134 49 119 4 113 121 28 123 61 120 60 29 131 52 26 127 111 84 108 79 116 114 3 112 115 1 129 104 73 78 97 95 5 124 2 105 75 93 45 107 122 128 10 71 96 15 41 94 7 90 130 82 37</file>
-                </tool>
-            </inputs>
         </file>
         <file>
             <name>$PROJ_DIR$\module_rfid.c</name>
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 43</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 46</file>
+                    <file> 30</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 58</file>
+                    <file> 36</file>
                 </tool>
             </outputs>
         </file>
@@ -195,15 +104,11 @@
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 63</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 55</file>
+                    <file> 38</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 56</file>
+                    <file> 35</file>
                 </tool>
             </outputs>
         </file>
@@ -212,161 +117,91 @@
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 80</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 87</file>
+                    <file> 45</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 100</file>
+                    <file> 51</file>
                 </tool>
             </outputs>
-            <inputs>
-                <tool>
-                    <name>ICCARM</name>
-                    <file> 119 4 113 83 126 85 125 88 121 28 123 61 120 60 29 131 52 26 127 111 84 108 79 116 114 3 112 115 1 129 104 73 78 97 95 5 124 2 105 75 93 45 107 122 128 10 71 96 94 54 7 90 130 82 18 41 37</file>
-                </tool>
-            </inputs>
         </file>
         <file>
             <name>$PROJ_DIR$\module_itoa.c</name>
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 47</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 64</file>
+                    <file> 32</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 50</file>
+                    <file> 34</file>
                 </tool>
             </outputs>
-            <inputs>
-                <tool>
-                    <name>ICCARM</name>
-                    <file> 132 83 126 85 125 88 54 89 24</file>
-                </tool>
-            </inputs>
         </file>
         <file>
             <name>$PROJ_DIR$\module_uart.c</name>
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 13</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 27</file>
-                </tool>
-                <tool>
-                    <name>BICOMP</name>
-                    <file> 76</file>
-                </tool>
-            </outputs>
-            <inputs>
-                <tool>
-                    <name>ICCARM</name>
-                    <file> 119 4 113 83 126 85 125 88 121 28 123 61 120 60 29 131 52 26 127 111 84 108 79 116 114 3 112 115 1 129 104 73 78 97 95 5 124 2 105 75 93 45 107 122 128 10 71 96 132 54 89 25 42 94 130 82</file>
-                </tool>
-            </inputs>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\startup_msp432p401r_ewarm.c</name>
-            <outputs>
-                <tool>
-                    <name>ICCARM</name>
-                    <file> 11</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 101</file>
-                </tool>
-                <tool>
-                    <name>BICOMP</name>
-                    <file> 117</file>
-                </tool>
-            </outputs>
-            <inputs>
-                <tool>
-                    <name>ICCARM</name>
-                    <file> 113 83 126 85 125 88</file>
-                </tool>
-            </inputs>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\system_msp432p401r.c</name>
-            <outputs>
-                <tool>
-                    <name>ICCARM</name>
-                    <file> 118</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 30</file>
-                </tool>
-                <tool>
-                    <name>BICOMP</name>
-                    <file> 110</file>
-                </tool>
-            </outputs>
-            <inputs>
-                <tool>
-                    <name>ICCARM</name>
-                    <file> 113 83 126 85 125 88 121 28 123 61 120 60 29 131 52 26 127</file>
-                </tool>
-            </inputs>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\module_keypad.c</name>
-            <outputs>
-                <tool>
-                    <name>ICCARM</name>
-                    <file> 68</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 51</file>
-                </tool>
-                <tool>
-                    <name>BICOMP</name>
-                    <file> 67</file>
-                </tool>
-            </outputs>
-            <inputs>
-                <tool>
-                    <name>ICCARM</name>
-                    <file> 119 4 113 83 126 85 125 88 121 28 123 61 120 60 29 131 52 26 127 111 84 108 79 116 114 3 112 115 1 129 104 73 78 97 95 5 124 2 105 75 93 45 107 122 128 10 71 96 94 54 7 90 130 82 9 41</file>
-                </tool>
-            </inputs>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\main.c</name>
-            <outputs>
-                <tool>
-                    <name>ICCARM</name>
-                    <file> 92</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 23</file>
+                    <file> 6</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
                     <file> 44</file>
                 </tool>
             </outputs>
-            <inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\startup_msp432p401r_ewarm.c</name>
+            <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 132 83 126 85 125 88 54 89 134 49 42 113 111 94 130 82 9 119 4 121 28 123 61 120 60 29 131 52 26 127 84 108 79 116 114 3 112 115 1 129 104 73 78 97 95 5 124 2 105 75 93 45 107 122 128 10 71 96 7 90 41 18 37 33 25 24 15</file>
+                    <file> 4</file>
                 </tool>
-            </inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 55</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\system_msp432p401r.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 56</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 54</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\module_keypad.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 42</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 41</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\main.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 49</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 31</file>
+                </tool>
+            </outputs>
         </file>
         <file>
             <name>$PROJ_DIR$\json_parse.c</name>
@@ -376,104 +211,58 @@
                     <file> 0</file>
                 </tool>
                 <tool>
-                    <name>__cstat</name>
-                    <file> 77</file>
-                </tool>
-                <tool>
                     <name>BICOMP</name>
-                    <file> 133</file>
+                    <file> 57</file>
                 </tool>
             </outputs>
-            <inputs>
-                <tool>
-                    <name>ICCARM</name>
-                    <file> 42 132 83 126 85 125 88 54 89 113 111 94 130 82</file>
-                </tool>
-            </inputs>
         </file>
         <file>
             <name>$PROJ_DIR$\lcd_st7565_lib.c</name>
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 102</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 69</file>
+                    <file> 52</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 98</file>
+                    <file> 50</file>
                 </tool>
             </outputs>
-            <inputs>
-                <tool>
-                    <name>ICCARM</name>
-                    <file> 119 4 113 83 126 85 125 88 121 28 123 61 120 60 29 131 52 26 127 111 84 108 79 116 114 3 112 115 1 129 104 73 78 97 95 5 124 2 105 75 93 45 107 122 128 10 71 96 94 54 7 90 130 82 37</file>
-                </tool>
-            </inputs>
         </file>
         <file>
             <name>$PROJ_DIR$\module_control_door.c</name>
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 70</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 57</file>
+                    <file> 43</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 59</file>
+                    <file> 37</file>
                 </tool>
             </outputs>
-            <inputs>
-                <tool>
-                    <name>ICCARM</name>
-                    <file> 39</file>
-                </tool>
-            </inputs>
         </file>
         <file>
             <name>$PROJ_DIR$\module_display.c</name>
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 86</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 74</file>
+                    <file> 47</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 91</file>
+                    <file> 48</file>
                 </tool>
             </outputs>
-            <inputs>
-                <tool>
-                    <name>ICCARM</name>
-                    <file> 119 4 113 83 126 85 125 88 121 28 123 61 120 60 29 131 52 26 127 111 84 108 79 116 114 3 112 115 1 129 104 73 78 97 95 5 124 2 105 75 93 45 107 122 128 10 71 96 94 54 7 90 130 82 41 37</file>
-                </tool>
-            </inputs>
         </file>
         <file>
             <name>$PROJ_DIR$\ewarm\Exe\main.out</name>
             <outputs>
                 <tool>
                     <name>OBJCOPY</name>
-                    <file> 65</file>
+                    <file> 39</file>
                 </tool>
             </outputs>
-            <inputs>
-                <tool>
-                    <name>ILINK</name>
-                    <file> 109 0 102 92 70 86 63 47 68 43 80 66 13 34 11 118 62 53 72 106</file>
-                </tool>
-            </inputs>
         </file>
     </configuration>
     <configuration>

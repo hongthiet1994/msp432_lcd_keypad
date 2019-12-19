@@ -20,5 +20,24 @@
 #define KEYPAD_PIN_COL_4        GPIO_PIN7
 
 
+enum NUMBER_KEY
+{
+  key_1 = 1,
+  key_2,
+  key_3,
+  key_4,
+  key_5,
+  key_6,
+  key_7,
+  key_8,
+  key_9,
+  key_0,
+  key_case,
+  key_enter,
+  key_up,
+  key_down,
+  key_select,
+  key_back
+};
 void init_keybad();
 void scan_row( uint16_t x);

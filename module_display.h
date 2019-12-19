@@ -32,3 +32,4 @@ enum STATES
 void begin();
 void init_LCD();
 void display_screen_delete_user();
+void process_keypad();

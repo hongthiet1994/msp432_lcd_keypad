@@ -18,8 +18,8 @@
 //#define address_start_infor     0x3E001
 
 
-#define CHECK_FALSE             0
-#define CHECK_TRUE              1
+
+
 #define CHECK_DISABLED          2
 #define LENGTH_ARRAY            6
 #define LENGTH_ARRAY1           3
@@ -39,6 +39,12 @@
 
 #define IP_LEN                  16
 #define SSID_LEN                32
+
+
+
+// For keypad
+extern bool is_press_keypad;
+
 
 extern char buffer_rxdata[MAX_BUFFER];
 
@@ -69,26 +75,6 @@ struct infor
 }employees[TOTAL],employees_backspace;
 
 
-enum NUMBER_KEY
-{
-  key_1 = 1,
-  key_2,
-  key_3,
-  key_4,
-  key_5,
-  key_6,
-  key_7,
-  key_8,
-  key_9,
-  key_0,
-  key_case,
-  key_enter,
-  key_up,
-  key_down,
-  key_select,
-  key_back
-};
-
 enum number_line
 {
   line0=0,
@@ -106,7 +92,7 @@ void list_returnKey();
 void profile_returnKey();
 void RFID_returnKey();
 void check_tag_RFID();
-void returnKey();
+
 
 
 void write_flash();
@@ -132,12 +118,12 @@ void Time32_INT1_1ms(uint16_t t);
 
 
 
-bool bo_read_complete = false;
+
 extern bool bo_tag_RFID;
 bool bo_check_tag = false;
 bool bo_key_role= false;
 extern bool bo_edge_select;
-extern bool press_key;
+
 bool check = false;
 bool add_user_rfid = false;
 char buffer_num[SIZE_KEY];
@@ -175,9 +161,9 @@ uint8_t ui8_operation_select=0;
 extern uint8_t ui8_key_input; 
 uint8_t ui8_key_input_befor=0;
 uint8_t ui8_key_input_late=0;
-uint8_t ui8_bit1 = 0;
-uint8_t ui8_row = 0;
-uint8_t ui8_col = 0;
+
+
+
 
 uint8_t ui8_time_open_door = 0;
 uint8_t cout = 0;
@@ -190,7 +176,7 @@ uint16_t ui16_idle = 0;
 uint16_t ui16_count = 0;
 
 uint32_t ui32_present_time;
-uint32_t ui32_RFID_code=0;
+extern uint32_t ui32_RFID_code;
 
 char* UART_ssid= "SSID";
 char* UART_ip  = "IP";
@@ -258,7 +244,7 @@ int main(void)
   clear_all_LCD();   
   begin();  
   Interrupt_enableMaster();
-  
+
   while(1)
   {
     if(ui8_num_cmd!=0)
@@ -393,10 +379,10 @@ int main(void)
       check = CHECK_FALSE;
       reset_Receiver_uart();
     }
-    if(press_key)
+    if(is_press_keypad)
     {
-      returnKey();
-      press_key = false;
+      process_keypad();
+      is_press_keypad = false;
     }    
   }  
 }
@@ -426,154 +412,6 @@ void T32_INT1_IRQHandler(void)
 }
 
 
-/*
-// The function interrup of PORT2, pin input RFID
-//     - read RFID and return code RFID
-*/
-void INT_PORT2_Haldler(void)
-{
-  ui16_status = MAP_GPIO_getEnabledInterruptStatus(GPIO_PORT_P2);
-  MAP_GPIO_clearInterruptFlag(GPIO_PORT_P2,ui16_status);
-  uint8_t array[11][5];
-  uint8_t array1[8][4];
-  uint8_t array2[8];
-  if (GPIO_PIN6 & ui16_status)
-  {    
-    Time_A0_100ns(1);
-    if(ui8_row<11 && bo_read_complete)
-    {      
-      array[ui8_row][ui8_col] = bo_edge_select;
-      ui8_col++;
-      if(ui8_col>4)
-      {
-        ui8_col = 0;
-        ui8_row++;
-      }
-    }
-    if(bo_edge_select)
-    {
-      ui8_bit1++;
-      if(ui8_bit1==9)
-      {
-        bo_read_complete = true;
-      }
-    }
-    else 
-      ui8_bit1 = 0;
-    if(ui8_row == 11)
-    {
-      for(int i=0;i<10;i++)
-      {
-        if((array[i][0]+array[i][1]+array[i][2]+array[i][3])%2 == array[i][4])
-        {
-          ui8_check = CHECK_TRUE;
-        }
-        else
-        {
-          ui8_check = CHECK_FALSE;
-          break;
-        }
-      }
-      if(ui8_check )
-      {
-        for(int i =0;i<8;i++)
-        {
-          for(int j=0;j<4;j++)
-            
-          {
-            array1[i][j] = array[2+i][j];
-          }
-        }
-        for(int i=0;i<8;i++)
-        {
-          array2[i] = array2[i]<<4;
-          for(int j=0;j<4;j++)
-          {
-            
-            array2[i]= array2[i]<<1  | array1[i][j];
-          }
-          
-        }
-        ui32_RFID_code = 0;
-        for(int i=0;i<8;i++)
-        {
-          ui32_RFID_code = ui32_RFID_code + (array2[i] *(int) pow(16,7-i));
-        }
-        bo_tag_RFID = true;
-        ui8_check = CHECK_FALSE;
-        returnKey();
-      }
-      
-      bo_read_complete =  false;
-      ui8_bit1 = 0;
-      ui8_row =  ui8_col = 0;  
-    }
-  }
-  
-}
-
-
-
-/*
-// The function returns the function of the key that corresponds to each mode
-*/
-void returnKey(void)
-{
-  switch (ui8_state)
-  {
-  case STATE_IDLE :
-    if(ui8_key_input == key_enter)
-    {
-      login();
-    }
-    check_tag_RFID();
-    break;
-  case STATE_LOGIN :
-    get_character();
-    check_tag_RFID(); 
-    break;
-  case STATE_MENU :
-    menu_returnKey();
-    break;
-  case STATE_INFOR :
-    if(ui8_key_input == key_back)
-    {
-      menu();
-    }
-    break;
-  case STATE_PROFILE :
-    profile_returnKey();
-    break;
-  case STATE_ADD_USER :
-    get_character();
-    break;
-  case STATE_MANAGE :
-    manage_returnKey();
-    break;
-  case STATE_DELETE :
-    delete_returnKey();
-    break;
-  case STATE_CHANGEPASS :
-    get_character();
-    break;
-  case STATE_LIST :
-    list_returnKey();
-    break;
-  case STATE_ADD_RFID_CODE :
-    RFID_returnKey();
-    break;
-  case STATE_CHOOSE : 
-    if(ui8_key_input==key_enter)
-    {
-      ui16_idle = 0;
-      menu();
-    }
-    break;
-  default :
-    break;
-  }
-  
-}
 /*
 // The function handle keys with special functions in different modes
 // example : key_enter, key_back...

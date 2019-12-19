@@ -7,7 +7,7 @@
 #include "module_keypad.h"
 #include "module_display.h"
 
-bool press_key = false;
+bool is_press_keypad = false;
 
 extern uint16_t ui16_idle;
 extern uint8_t ui8_state;
@@ -42,6 +42,7 @@ const unsigned char     key3[10][5] =  {{'+','-','*','/','1'}
 ,{'t','u','v',',','8'}
 ,{'w','x','y','z','9'}
 ,{'#','$','.','?','0'}};
+
 
 
 
@@ -111,7 +112,7 @@ void INT_PORT6_Haldler(void)
 {
   ui16_status = GPIO_getEnabledInterruptStatus(GPIO_PORT_P6);
   GPIO_clearInterruptFlag(GPIO_PORT_P6, ui16_status);
-  press_key = true;
+  is_press_keypad = true;
   if(ui8_state != STATE_WAWITING && ui8_state != STATE_IDLE)
   {
     ui16_idle = 0;
