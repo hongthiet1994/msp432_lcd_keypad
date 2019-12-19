@@ -306,8 +306,7 @@ int main(void)
           free_string(buffer_txdata,MAX_BUFFER);
           free_string(buffer_RFID,MAX_KEY);
           free_string(buffer_timeOpen,MAX_KEY);
-        }
-        
+        }        
       }
       else 
       {
