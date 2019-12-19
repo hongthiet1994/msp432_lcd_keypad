@@ -15,7 +15,8 @@ extern uint8_t ui8_state;
 uint8_t ui8_key_input = 0; 
 uint16_t ui16_status = 0;
 
-const unsigned int  key1[4][4] ={{1,2,3,13}
+const unsigned int  key1[4][4] =
+{{1,2,3,13}
 ,{4,5,6,14}
 ,{7,8,9,15}
 ,{11,10,12,16}};
@@ -132,6 +133,7 @@ void INT_PORT6_Haldler(void)
   else if(ui16_status & KEYPAD_PIN_COL_4)
   {
     scan_row(4);   
-  }  
+  } 
+  
 }
 

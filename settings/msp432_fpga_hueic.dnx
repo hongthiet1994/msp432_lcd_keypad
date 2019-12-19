@@ -16,7 +16,7 @@
         <ShowSource>1</ShowSource>
     </Trace1>
     <DebugChecksum>
-        <Checksum>1095986845</Checksum>
+        <Checksum>2362949478</Checksum>
     </DebugChecksum>
     <Disassembly>
         <InstrCount>0</InstrCount>
@@ -86,6 +86,7 @@
     </array_types>
     <watch_formats>
         <Fmt0>{W}42:ui8_employee_code	3	0</Fmt0>
+        <Fmt1>{W}42:ui8_key_input	3	0</Fmt1>
     </watch_formats>
     <StateLog>
         <LogEnabled>0</LogEnabled>

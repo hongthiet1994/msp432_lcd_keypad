@@ -381,7 +381,7 @@ int main(void)
     }
     if(is_press_keypad)
     {
-      process_keypad();
+      //process_keypad();
       is_press_keypad = false;
     }    
   }  
