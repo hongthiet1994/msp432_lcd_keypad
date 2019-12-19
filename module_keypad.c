@@ -107,7 +107,7 @@ void scan_row(uint16_t x)
 }
 
 
-// interrupt col
+// interrupt col - get key here
 void INT_PORT6_Haldler(void)
 {
   ui16_status = GPIO_getEnabledInterruptStatus(GPIO_PORT_P6);

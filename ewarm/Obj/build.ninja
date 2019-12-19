@@ -1,0 +1,44 @@
+#Generating source browse information for project msp432_fpga_hueic
+
+
+#Abbreviations
+cc = C$:\Program$ Files$ (x86)\IAR$ Systems\Embedded$ Workbench$ 8.3_2\common\bin\SourceIndexer.exe
+ll = C$:\Program$ Files$ (x86)\IAR$ Systems\Embedded$ Workbench$ 8.3_2\common\bin\PbdLink.exe
+bd = C$:\Program$ Files$ (x86)\IAR$ Systems\Embedded$ Workbench$ 8.3_2\common\bin\makeBrowseData.exe
+
+
+
+#Rules
+rule index
+  depfile = $out.dep
+  command = $cc -out=$out -f $in
+rule link
+  command = $ll -M $out $in
+rule browsedata
+  command = $bd $in -output  $out
+
+
+
+#Build steps
+build json_parse.pbi : index json_parse.xcl
+build lcd_st7565_lib.pbi : index lcd_st7565_lib.xcl
+build main.pbi : index main.xcl
+build module_control_door.pbi : index module_control_door.xcl
+build module_display.pbi : index module_display.xcl
+build module_flash.pbi : index module_flash.xcl
+build module_itoa.pbi : index module_itoa.xcl
+build module_keypad.pbi : index module_keypad.xcl
+build module_rfid.pbi : index module_rfid.xcl
+build module_rtc.pbi : index module_rtc.xcl
+build module_timer.pbi : index module_timer.xcl
+build module_uart.pbi : index module_uart.xcl
+build startup_msp432p401r_ewarm.pbi : index startup_msp432p401r_ewarm.xcl
+build system_msp432p401r.pbi : index system_msp432p401r.xcl
+build msp432_fpga_hueic_part0.pbi : link json_parse.pbi lcd_st7565_lib.pbi main.pbi module_control_door.pbi
+build msp432_fpga_hueic_part1.pbi : link module_display.pbi module_flash.pbi module_itoa.pbi module_keypad.pbi
+build msp432_fpga_hueic_part2.pbi : link module_rfid.pbi module_rtc.pbi module_timer.pbi module_uart.pbi
+build msp432_fpga_hueic_part3.pbi : link startup_msp432p401r_ewarm.pbi system_msp432p401r.pbi
+build msp432_fpga_hueic.pbd : link msp432_fpga_hueic_part0.pbi msp432_fpga_hueic_part1.pbi msp432_fpga_hueic_part2.pbi msp432_fpga_hueic_part3.pbi
+build msp432_fpga_hueic.pbw : browsedata msp432_fpga_hueic.pbd
+
+
