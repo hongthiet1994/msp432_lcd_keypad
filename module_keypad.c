@@ -5,7 +5,12 @@
 #include <time.h>
 #include <stdlib.h>
 #include "module_keypad.h"
+#include "module_display.h"
 
+bool press_key = false;
+
+extern uint16_t ui16_idle;
+extern uint8_t ui8_state;
 
 uint8_t ui8_key_input = 0; 
 uint16_t ui16_status = 0;
@@ -99,3 +104,33 @@ void scan_row(uint16_t x)
   }
   GPIO_setOutputLowOnPin(KEYPAD_PORT_ROW,GPIO_PIN1+GPIO_PIN0+GPIO_PIN4+GPIO_PIN5);
 }
+
+
+// interrupt col
+void INT_PORT6_Haldler(void)
+{
+  ui16_status = GPIO_getEnabledInterruptStatus(GPIO_PORT_P6);
+  GPIO_clearInterruptFlag(GPIO_PORT_P6, ui16_status);
+  press_key = true;
+  if(ui8_state != STATE_WAWITING && ui8_state != STATE_IDLE)
+  {
+    ui16_idle = 0;
+  }
+  if(ui16_status & KEYPAD_PIN_COL_1)
+  {
+    scan_row(1);
+  }
+  else if(ui16_status & KEYPAD_PIN_COL_2)
+  {
+    scan_row(2);
+  }
+  else if(ui16_status & KEYPAD_PIN_COL_3)
+  {
+    scan_row(3);
+  }
+  else if(ui16_status & KEYPAD_PIN_COL_4)
+  {
+    scan_row(4);   
+  }  
+}
+

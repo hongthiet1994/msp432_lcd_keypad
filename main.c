@@ -137,7 +137,7 @@ extern bool bo_tag_RFID;
 bool bo_check_tag = false;
 bool bo_key_role= false;
 extern bool bo_edge_select;
-bool press_key = false;
+extern bool press_key;
 bool check = false;
 bool add_user_rfid = false;
 char buffer_num[SIZE_KEY];
@@ -208,8 +208,7 @@ void delay(uint32_t t)
 
 int main(void)
 {
-  // config and read Flash
-  
+  // config and read Flash  
   FlashCtl_setWaitState(FLASH_BANK0, 2);
   FlashCtl_setWaitState(FLASH_BANK1, 2);
   
@@ -231,7 +230,7 @@ int main(void)
   CS_setReferenceOscillatorFrequency(CS_REFO_128KHZ);
   CS_initClockSignal(CS_ACLK, CS_REFOCLK_SELECT, CS_CLOCK_DIVIDER_1);
   
-
+  
   
   // config input RFID                            
   GPIO_setAsInputPinWithPullDownResistor(GPIO_PORT_P2, GPIO_PIN6);
@@ -393,7 +392,7 @@ int main(void)
         }
       }
       check = CHECK_FALSE;
-     reset_Receiver_uart();
+      reset_Receiver_uart();
     }
     if(press_key)
     {
@@ -428,33 +427,6 @@ void T32_INT1_IRQHandler(void)
 }
 
 
-// interrupt col
-void INT_PORT6_Haldler(void)
-{
-  ui16_status = GPIO_getEnabledInterruptStatus(GPIO_PORT_P6);
-  GPIO_clearInterruptFlag(GPIO_PORT_P6, ui16_status);
-  press_key = true;
-  if(ui8_state != STATE_WAWITING && ui8_state != STATE_IDLE)
-  {
-    ui16_idle = 0;
-  }
-  if(ui16_status & KEYPAD_PIN_COL_1)
-  {
-    scan_row(1);
-  }
-  else if(ui16_status & KEYPAD_PIN_COL_2)
-  {
-    scan_row(2);
-  }
-  else if(ui16_status & KEYPAD_PIN_COL_3)
-  {
-    scan_row(3);
-  }
-  else if(ui16_status & KEYPAD_PIN_COL_4)
-  {
-    scan_row(4);   
-  }  
-}
 /*
 // The function interrup of PORT2, pin input RFID
 //     - read RFID and return code RFID
@@ -1799,7 +1771,6 @@ void RFID_returnKey()
   }
 }
 
-
 void check_tag_RFID()
 {
   if (bo_tag_RFID && ui32_RFID_code != 0)
@@ -1860,8 +1831,7 @@ void check_tag_RFID()
       ui16_idle = MAX_TIME_WAITING - 2;
       Interrupt_disableInterrupt(INT_PORT2);
       Time32_INT2_1ms(300);
-    }
-    
+    }    
   }
 }
 
