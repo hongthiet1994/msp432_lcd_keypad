@@ -102,9 +102,11 @@ void TA1_N_IRQHandler(void)
     Interrupt_disableInterrupt(INT_TA1_N);
   }
 }
+
+
+// Timer blink _ 300ms
 void T32_INT2_IRQHandler(void)
-{
-  
+{  
   Timer32_clearInterruptFlag(TIMER32_1_BASE);
   if(ui8_state != STATE_IDLE)
     ui16_idle++;
@@ -117,16 +119,7 @@ void T32_INT2_IRQHandler(void)
   }
   if(ui8_state == STATE_LOGIN|| ui8_state == STATE_ADD_USER || ui8_state == STATE_CHANGEPASS)
   {
-    if((ui16_idle%2))
-    {
-      lcd_gotoxy(x_blink,y_blink);
-      lcd_putc('_',1);
-    }
-    else
-    {
-      lcd_gotoxy(x_blink,y_blink);
-      lcd_putc(' ',1);
-    }
+    display_icon_blink(ui16_idle,x_blink,y_blink);  //600ms
   }
   Timer32_setCount  (TIMER32_1_BASE, 48000 * TIME_WAITING_KEY);
   Timer32_enableInterrupt(TIMER32_1_BASE);

@@ -192,3 +192,36 @@ void process_keypad(void)
   }
   
 }
+
+// abc or ABC or 123
+void display_icon_type_input(uint8_t ui8_type_input)
+{
+  uint8_t temp = ui8_type_input%3;
+  switch(temp)
+  {
+  case INPUT_LOWERCASE_LETTERS:
+    lcd_gotoxy(18,0);
+    lcd_puts("abc",0);
+    break;
+  case INPUT_CAPITAL_LETTER:
+    lcd_gotoxy(18,0);
+    lcd_puts("ABC",0);
+    break;
+  case INPUT_NUMBER:
+    lcd_gotoxy(18,0);
+    lcd_puts("123",0);
+    break;  
+  }
+}
+
+void display_icon_blink(uint8_t value,uint8_t x,uint8_t y)
+{
+  if(value%2)
+  {
+    display_icon(ICON_BLINK_UP,x,y,COLOR_BLACK);
+  }
+  else
+  {
+    display_icon(ICON_BLINK_DOWN,x,y,COLOR_BLACK);
+  }
+}

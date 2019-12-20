@@ -112,9 +112,6 @@ int getValueInt(const char* jsonData,char* fieldName,uint8_t* outputNumber)
   return -1;  
 }
 void free_string(char* string_input,uint32_t len)
-{
-  for(int i=0;i<len;i++)
-  {
-    string_input[i] = '\0';
-  }
+{  
+  memcpy(string_input,0x00,len);
 }

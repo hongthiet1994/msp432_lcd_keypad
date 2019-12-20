@@ -129,22 +129,21 @@ const unsigned char font[][6] ={   //Font 5x7
 //              - 1 : white
 // return NULL
 */
-void lcd_putc(uint16_t data,bool color)
-{
-  
-  uint8_t v;
+void display_char(uint8_t data,bool color)
+{  
+  uint8_t i;
   if((data >= 0x1E) && (data <= 0x7f))
   {
     data=data-30;
-    for(v=0;v<6;v++)
+    for(i=0;i<6;i++)
     {
       if(color)
       {
-        lcd_write(1, font[data][v]);
+        lcd_write(1, font[data][i]);
       }
       else
       {
-        lcd_write(1, ~font[data][v]);
+        lcd_write(1, ~font[data][i]);
       }
     }
   }
@@ -186,11 +185,11 @@ void lcd_puts(char *s,bool color)
   {
     if(color)
     {
-      lcd_putc(*s++,1);
+      display_char(*s++,1);
     }
     else
     {
-      lcd_putc(*s++,0);
+      display_char(*s++,0);
     }
   }
 }
@@ -252,7 +251,7 @@ void lcd_clear(uint8_t x1,uint8_t x2,uint8_t y1, uint8_t y2)
     for(w=x1;w<=x2;w++)
     {
       lcd_gotoxy(w,u);
-      lcd_putc(' ',1);
+      display_char(' ',1);
     }
   }
 }
@@ -311,3 +310,43 @@ void lcd_write(bool cd, uint8_t byte)
   
 }
 
+void display_icon(uint8_t icon,uint8_t x, uint8_t y,uint8_t color)
+{
+  lcd_gotoxy(x,y);
+  display_char(icon,color);
+}
+
+void display_string(char* string,uint8_t len, uint8_t pos_x, uint8_t pos_y, uint8_t  color, uint8_t align)
+{
+  uint8_t i = 0;
+  switch(align)
+  {
+  case DISPLAY_ALIGN_NONE:
+    lcd_gotoxy(pos_x,pos_y);    
+    for(i = 0; i < len;i++)
+    {
+      if(i%MAX_CHARACTER_IN_LINE ==0 && (i!=0))
+      {
+        pos_y = pos_y+1;
+        lcd_gotoxy(0,pos_y);
+      }
+      display_char(string[i],color); 
+    }
+    break;
+  case DISPLAY_ALIGN_CENTRAL:
+    if(len <= MAX_CHARACTER_IN_LINE)
+    {
+      pos_x = (MAX_CHARACTER_IN_LINE - len)/2;
+      lcd_gotoxy(pos_x,pos_y); 
+      for(i=0;i<len;i++)
+      {
+        display_char(string[i],color); 
+      }        
+    }
+    break;
+  case DISPLAY_ALIGN_LEFT:
+    break;
+  case DISPLAY_ALIGN_RIGHT:
+    break;
+  }
+}

@@ -241,13 +241,12 @@ int main(void)
   // init
   init_LCD();
   
-  
   init_keybad();
-  clear_all_LCD();
-
+  clear_all_LCD(); 
+  
   begin();  
   Interrupt_enableMaster();
-
+  
   while(1)
   {
     if(ui8_num_cmd!=0)
@@ -394,7 +393,7 @@ void T32_INT1_IRQHandler(void)
 {
   Timer32_clearInterruptFlag(TIMER32_0_BASE);
   lcd_gotoxy(x_lcd,y_lcd);
-  lcd_putc(ui8_key_input_late,1);
+  display_char(ui8_key_input_late,1);
   if(ui8_press_enter == 0)
     str_key_user[i8_counter] = ui8_key_input_late;
   else if(ui8_press_enter == PRESS_ENTER_ONEC)
@@ -403,7 +402,7 @@ void T32_INT1_IRQHandler(void)
     if(ui8_state == STATE_LOGIN)
     {
       lcd_gotoxy(x_lcd,y_lcd);
-      lcd_putc('*',1);
+      display_char('*',1);
     }
   }
   i8_counter++;
@@ -436,7 +435,7 @@ void special_Keys(int a)
       if(ui8_press_enter == PRESS_ENTER_ONEC)
       {
         lcd_gotoxy(x_blink, y_blink);
-        lcd_putc(' ',1);
+        display_char(' ',1);
         if(ui8_state ==   STATE_CHANGEPASS)
         {
           x_lcd = 8;
@@ -451,7 +450,7 @@ void special_Keys(int a)
       else if(ui8_press_enter == PRESS_ENTER_TWICE)
       {
         lcd_gotoxy(x_blink,y_blink);
-        lcd_putc(' ',1);
+        display_char(' ',1);
         if(ui8_state == STATE_LOGIN)
         {
           if(!strcmp(str_key_user,"")  || !strcmp(str_key_pass,"")  )
@@ -667,14 +666,14 @@ void special_Keys(int a)
     if(a == KEY_BACK)
     {
       lcd_gotoxy(x_lcd, y_lcd);
-      lcd_putc(' ',1);
+      display_char(' ',1);
       x_lcd--;
       if(x_lcd < 5)
       {
         x_lcd = 5;
       }
       lcd_gotoxy(x_lcd, y_lcd);
-      lcd_putc(' ',1);
+      display_char(' ',1);
       if(ui8_press_enter == 0)
       {
         str_key_user[i8_counter]= '\0';
@@ -707,21 +706,7 @@ void special_Keys(int a)
       {
         ui8_font_word = 0;
       }
-      if((ui8_font_word%3) == 0)
-      {
-        lcd_gotoxy(18,0);
-        lcd_puts("abc",0);
-      }
-      else if ((ui8_font_word%3)==1)
-      {
-        lcd_gotoxy(18,0);
-        lcd_puts("ABC",0);
-      }
-      else
-      {
-        lcd_gotoxy(18,0);
-        lcd_puts("123",0);
-      }
+      display_icon_type_input(ui8_font_word);
     }
     if(ui8_key_press == KEY_UP && ui8_state == STATE_ADD_USER && ui8_press_enter == PRESS_ENTER_TWICE)
     {
@@ -783,7 +768,7 @@ void Time32_INT1_1ms(uint16_t t)
 void Time32_INT2_1ms(uint16_t t)
 {
   Interrupt_enableInterrupt(INT_T32_INT2);
-  Timer32_setCount  (TIMER32_1_BASE, 48000 * t);
+  Timer32_setCount(TIMER32_1_BASE, 48000 * t);
   Timer32_enableInterrupt(TIMER32_1_BASE);
   Timer32_startTimer(TIMER32_1_BASE, true);
   
@@ -797,29 +782,14 @@ void Time32_INT2_1ms(uint16_t t)
 void change_password()
 {  
   clear_all_LCD();
-  lcd_gotoxy(0,0);
-  lcd_putc(0x7f,1);
+  display_icon(ICON_ARROW,ICON_ARROW_X, ICON_ARROW_Y,COLOR_BLACK);
   lcd_gotoxy(2,0);
   lcd_puts("CHANGE PASSWORD",1);
   lcd_gotoxy(0,2);
   lcd_puts("NewPass:",1);
   lcd_gotoxy(0,4);
   lcd_puts("Retype :",1);
-  if((ui8_font_word%3) == 0)
-  {
-    lcd_gotoxy(18,0);
-    lcd_puts("abc",0);
-  }
-  else if ((ui8_font_word%3)== 1)
-  {
-    lcd_gotoxy(18,0);
-    lcd_puts("ABC",0);
-  }
-  else
-  {
-    lcd_gotoxy(18,0);
-    lcd_puts("123",0);
-  }
+  display_icon_type_input(ui8_font_word);
   x_lcd = x_blink = 8;
   y_lcd = y_blink = 2;
   for(i=0;i<10;i++)
@@ -861,8 +831,7 @@ void profile_user()
   
   ui8_state = STATE_PROFILE;
   clear_all_LCD();
-  lcd_gotoxy(0,0);
-  lcd_putc(0x7f,1);
+  display_icon(ICON_ARROW,ICON_ARROW_X, ICON_ARROW_Y,COLOR_BLACK);
   lcd_gotoxy(3,0);
   lcd_puts("PROFILE USER ",1);
   lcd_gotoxy(0,2);
@@ -885,7 +854,7 @@ void profile_user()
   lcd_puts("RFID:",1);
   if(employees[ui8_employee_code_edit].ui32_RFID==0)
   {
-    lcd_putc('0',1);
+    display_char('0',1);
   }
   else
   {
@@ -903,39 +872,17 @@ void profile_user()
 void login()
 {  
   ui8_state = STATE_LOGIN;  
-  clear_all_LCD();
-  lcd_gotoxy(0,0);
-  lcd_putc(0x7f,1);
-  lcd_gotoxy(8,0);
-  lcd_puts("LOGIN",1);
-  lcd_gotoxy(0,2);
-  lcd_puts("User:",1);
-  lcd_gotoxy(0,4);
-  lcd_puts("Pass:",1);
-  if((ui8_font_word%3) == 0)
-  {
-    lcd_gotoxy(18,0);
-    lcd_puts("abc",0);
-  }
-  else if ((ui8_font_word%3)== 1)
-  {
-    lcd_gotoxy(18,0);
-    lcd_puts("ABC",0);
-  }
-  else
-  {
-    lcd_gotoxy(18,0);
-    lcd_puts("123",0);
-  }
+  clear_all_LCD();  
+  display_icon(ICON_ARROW,ICON_ARROW_X, ICON_ARROW_Y,COLOR_BLACK);    
+  display_string(STRING_LOGIN,LEN_STRING_LOGIN,STRING_LOGIN_X,STRING_LOGIN_Y,COLOR_BLACK,DISPLAY_ALIGN_CENTRAL);
+  display_string(STRING_USER,LEN_STRING_USER,STRING_USER_X,STRING_USER_Y,COLOR_BLACK,DISPLAY_ALIGN_NONE);
+  display_string(STRING_PASS,LEN_STRING_PASS,STRING_PASS_X,STRING_PASS_Y,COLOR_BLACK,DISPLAY_ALIGN_NONE);  
+  display_icon_type_input(ui8_font_word);
   x_lcd = x_blink =5;
-  y_lcd = y_blink = 2;
-  for(i=0;i<10;i++)
-  {
-    str_key_user[i]='\0';
-    str_key_pass[i]='\0';
-  }
-  i8_counter = 0;
-  
+  y_lcd = y_blink = 2;   
+  free_string(str_key_user,SIZE_KEY);
+  free_string(str_key_pass,SIZE_KEY);  
+  i8_counter = 0;  
   Interrupt_enableInterrupt(INT_PORT2);
   ui8_press_enter = 0;
   ui8_key_input_befor = 0;
@@ -946,10 +893,9 @@ void login()
 void menu()
 {  
   clear_all_LCD();
-  lcd_gotoxy(0,0);
-  lcd_putc(0x7f,1);
+  display_icon(ICON_ARROW,ICON_ARROW_X, ICON_ARROW_Y,COLOR_BLACK);
   lcd_gotoxy(20,0);
-  lcd_putc(0x7e,1);
+  display_char(0x7e,1);
   lcd_gotoxy(6,0);
   lcd_puts("MAIN MENU",1);
   for(i=0;i<LENGTH_ARRAY1;i++)
@@ -964,9 +910,8 @@ void menu()
   Time32_INT2_1ms(300);
 }
 void get_character()
-{
-  
-  if(ui8_key_press>=KEY_NUMBER_1 && ui8_key_press <=KEY_NUMBER_0&& i8_counter <MAX_KEY)
+{  
+  if(ui8_key_press >= KEY_NUMBER_1 && ui8_key_press <= KEY_NUMBER_0 && i8_counter <MAX_KEY)
   {
     Interrupt_disableInterrupt(INT_T32_INT2);
     Timer32_disableInterrupt(TIMER32_1_BASE);
@@ -1009,7 +954,7 @@ void get_character()
           }
           str_key_pass[i8_counter] = ui8_key_input_late;
           lcd_gotoxy(x_lcd, y_lcd);
-          lcd_putc('*',1);
+          display_char('*',1);
         }
         i8_counter++;
         ui8_key_input_late = ui8_key_press+48;
@@ -1020,7 +965,7 @@ void get_character()
         x_lcd++;
       }
       lcd_gotoxy(x_lcd, y_lcd);
-      lcd_putc(ui8_key_input_late,1);
+      display_char(ui8_key_input_late,1);
       
     }
     else if(ui8_key_input_befor == 0)
@@ -1044,7 +989,7 @@ void get_character()
         }
       }
       lcd_gotoxy(x_lcd, y_lcd);
-      lcd_putc(ui8_key_input_late,1);
+      display_char(ui8_key_input_late,1);
       
     }
     else
@@ -1092,7 +1037,7 @@ void get_character()
         if(ui8_state == STATE_LOGIN)
         {
           lcd_gotoxy(x_lcd, y_lcd);
-          lcd_putc('*',1);
+          display_char('*',1);
         }
       }
       i8_counter++;
@@ -1115,7 +1060,7 @@ void get_character()
         }
       }
       lcd_gotoxy(x_lcd, y_lcd);
-      lcd_putc(ui8_key_input_late,1); 
+      display_char(ui8_key_input_late,1); 
     }
     ui8_key_input_befor = ui8_key_press;
   }
@@ -1142,10 +1087,9 @@ void list_user()
   
   ui8_state = STATE_LIST;
   clear_all_LCD();
-  lcd_gotoxy(0,0);
-  lcd_putc(0x7f,1);
+  display_icon(ICON_ARROW,ICON_ARROW_X, ICON_ARROW_Y,COLOR_BLACK);
   lcd_gotoxy(20,0);
-  lcd_putc(0x7e,1);
+  display_char(0x7e,1);
   lcd_gotoxy(6,0);
   lcd_puts("LIST USER",1);
   for(i=(line_in_list/5)*5;(i<(line_in_list/5)*5+5) && ( i < ui8_number_member);i++)
@@ -1155,11 +1099,11 @@ void list_user()
     lcd_gotoxy(12,(i%5)+2);
     if(employees[i].ui8_wrong!=MAX_WRONG)
     {
-      lcd_putc('v',1);
+      display_char('v',1);
     }
     else
     {
-      lcd_putc('x',1);
+      display_char('x',1);
     }
     
   }
@@ -1168,7 +1112,7 @@ void list_user()
   if((line_in_list/5)>0)
   {
     lcd_gotoxy(14,1);
-    lcd_putc(30,1);
+    display_char(30,1);
   }
   else
   {
@@ -1177,22 +1121,21 @@ void list_user()
   if(((ui8_number_member-1)/5)!= (line_in_list/5))
   {
     lcd_gotoxy(14,7);
-    lcd_putc(31,1);
+    display_char(31,1);
   }
   else
   {
     lcd_clear(0,21,7,7); 
   }
   lcd_gotoxy(14,((int)((float)line_in_list/(float)ui8_number_member)*5+2));
-  lcd_putc('|',1);
+  display_char('|',1);
 }
 void manage_user()
 {
   clear_all_LCD();  
-  lcd_gotoxy(0,0);
-  lcd_putc(0x7f,1);
+  display_icon(ICON_ARROW,ICON_ARROW_X, ICON_ARROW_Y,COLOR_BLACK);
   lcd_gotoxy(20,0);
-  lcd_putc(0x7e,1);
+  display_char(0x7e,1);
   lcd_gotoxy(3,0);
   lcd_puts("MANANEMENT USER",1);
   for(i=0;i<LENGTH_ARRAY;i++)
@@ -1210,8 +1153,7 @@ void add_user()
   
   ui8_state = STATE_ADD_USER;
   clear_all_LCD();
-  lcd_gotoxy(0,0);
-  lcd_putc(0x7f,1);
+  display_icon(ICON_ARROW,ICON_ARROW_X, ICON_ARROW_Y,COLOR_BLACK);
   lcd_gotoxy(2,0);
   lcd_puts("ADD NEW USER",1);
   lcd_gotoxy(0,2);
@@ -1220,21 +1162,7 @@ void add_user()
   lcd_puts("Pass:",1);
   lcd_gotoxy(0,6);
   lcd_puts("Role: Admin   Member",1);
-  if((ui8_font_word%3) == 0)
-  {
-    lcd_gotoxy(18,0);
-    lcd_puts("abc",0);
-  }
-  else if ((ui8_font_word%3)== 1)
-  {
-    lcd_gotoxy(18,0);
-    lcd_puts("ABC",0);
-  }
-  else
-  {
-    lcd_gotoxy(18,0);
-    lcd_puts("123",0);
-  }
+  display_icon_type_input(ui8_font_word);
   x_lcd = x_blink =5;
   y_lcd = y_blink = 2;
   for(i=0;i<10;i++)
@@ -1252,8 +1180,7 @@ void system_information()
   send_string_UART("{\"CMD\":1}");   
   ui8_state = STATE_INFOR;
   clear_all_LCD();
-  lcd_gotoxy(0,0);
-  lcd_putc(0x7f,1);
+  display_icon(ICON_ARROW,ICON_ARROW_X, ICON_ARROW_Y,COLOR_BLACK);
   lcd_gotoxy(2,0);
   lcd_puts("SYSTEM INFORMATION",1);
   lcd_gotoxy(0,2);
@@ -1270,8 +1197,7 @@ void add_RFID()
   
   ui32_RFID_code = 0;
   clear_all_LCD();
-  lcd_gotoxy(0,0);
-  lcd_putc(0x7f,1);
+  display_icon(ICON_ARROW,ICON_ARROW_X, ICON_ARROW_Y,COLOR_BLACK);
   lcd_gotoxy(4,0);
   lcd_puts("ADD TAG RFID",1);
   lcd_gotoxy(0,3);
@@ -1297,11 +1223,11 @@ void list_returnKey()
       lcd_gotoxy(12,(i%5)+2);
       if(employees[i].ui8_wrong!=MAX_WRONG)
       {
-        lcd_putc('v',1);
+        display_char('v',1);
       }
       else
       {
-        lcd_putc('x',1);
+        display_char('x',1);
       }
     }
     lcd_gotoxy(0,line_in_list%5+2);
@@ -1309,7 +1235,7 @@ void list_returnKey()
     if((line_in_list/5)>0)
     {
       lcd_gotoxy(14,1);
-      lcd_putc(30,1);
+      display_char(30,1);
     }
     else
     {
@@ -1318,14 +1244,14 @@ void list_returnKey()
     if(((ui8_number_member-1)/5)!= (line_in_list/5))
     {
       lcd_gotoxy(14,7);
-      lcd_putc(31,1);
+      display_char(31,1);
     }
     else
     {
       lcd_clear(0,21,7,7);
     }
     lcd_gotoxy(14,((int)((float)line_in_list/(float)ui8_number_member)*5+2));
-    lcd_putc('|',1);
+    display_char('|',1);
   }
   else if(ui8_key_press == KEY_DOWN)
   {
@@ -1342,11 +1268,11 @@ void list_returnKey()
       lcd_gotoxy(12,(i%5)+2);
       if(employees[i].ui8_wrong!=MAX_WRONG)
       {
-        lcd_putc('v',1);
+        display_char('v',1);
       }
       else
       {
-        lcd_putc('x',1);
+        display_char('x',1);
       }
     }
     lcd_gotoxy(0,line_in_list%5+2);
@@ -1354,21 +1280,21 @@ void list_returnKey()
     if((line_in_list/5)>0)
     {
       lcd_gotoxy(14,1);
-      lcd_putc(30,1);
+      display_char(30,1);
     }
     else
       lcd_clear(0,21,1,1);
     if(((ui8_number_member-1)/5)!= (line_in_list/5))
     {
       lcd_gotoxy(14,7);
-      lcd_putc(31,1);
+      display_char(31,1);
     }
     else
     {
       lcd_clear(0,21,7,7);
     }
     lcd_gotoxy(14,((int)((float)line_in_list/(float)ui8_number_member)*5+2));
-    lcd_putc('|',1);
+    display_char('|',1);
   }
   else if(ui8_key_press == KEY_BACK)
   {

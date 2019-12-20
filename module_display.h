@@ -29,7 +29,35 @@ enum STATES
   STATE_CHOOSE
 };
 
+#define ICON_ARROW      0x7f
+#define ICON_ARROW_X    0
+#define ICON_ARROW_Y    0
+
+#define ICON_BLINK_UP      '_'
+#define ICON_BLINK_DOWN    ' '
+
+
+
+#define STRING_LOGIN       "LOGIN"
+#define LEN_STRING_LOGIN   strlen(STRING_LOGIN)
+#define STRING_LOGIN_X      8
+#define STRING_LOGIN_Y      0
+
+
+#define STRING_USER         "User"
+#define LEN_STRING_USER     strlen(STRING_USER) 
+#define STRING_USER_X       0    
+#define STRING_USER_Y       2
+
+#define STRING_PASS         "Pass"
+#define LEN_STRING_PASS     strlen(STRING_USER) 
+#define STRING_PASS_X       0    
+#define STRING_PASS_Y       4
+
+
 void begin();
 void init_LCD();
 void display_screen_delete_user();
 void process_keypad();
+void display_icon_type_input(uint8_t ui8_type_input);
+void display_icon_blink(uint8_t value,uint8_t x,uint8_t y);
